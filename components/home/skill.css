@@ -1,0 +1,80 @@
+.skills-section {
+    margin: 2rem 0; /* Add some margin for spacing */
+}
+
+.skills-section h2 {
+    text-align: left; /* Center the "Skills" heading */
+    margin-bottom: 1rem; /* Add some space below the heading */
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow skills to wrap onto multiple lines */
+    justify-content: center; /* Center the skills horizontally */
+}
+
+.skill-card {
+    margin: 1rem; /* Add some space between skill cards */
+    padding: 1rem;
+    border: 1px solid #ddd; /* Add a thin border */
+    border-radius: 5px; /* Add some rounded corners */
+    text-align: center; /* Center the content22 within the card */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    transition: all 0.2s ease-in-out; /* Add a smooth hover effect */
+}
+
+.skill-card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow intensity on hover */
+}
+
+.skill-card p {
+    margin-top: 0.5rem; /* Add some space between the icon and skill name */
+    font-weight: bold; /* Make the skill name slightly bolder */
+}
+
+/* Optional: Adjust icon size */
+.skill-card .fa-lg {
+    font-size: 3rem; /* Adjust the font size of the icon based on your preference */
+}
+
+.resume-download {
+    margin: 30px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+}
+.download-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 80%;
+    max-width: 300px;
+    font-size: 1em;
+    display: flex;
+}
+.download-button:hover {
+    background-color: #0056b3;
+}
+@media (max-width: 768px) {
+    .download-button {
+        width: 90%;
+    }
+}
+.line-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    margin: 20px 0; /* Optional: Adjusts vertical spacing */
+}
+
+.line {
+    width: 50%;
+    height: 2px;
+    background-color: aqua;
+    margin: 1%; /* Optional: Adjusts spacing around the line */
+}
