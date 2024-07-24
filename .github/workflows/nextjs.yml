@@ -75,6 +75,12 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+      - name: Create env file
+        run: |
+          touch .env.local
+          echo NEXT_PUBLIC_SERVICE_ID= ${{secrets.NEXT_PUBLIC_SERVICE_ID}} >> .env.local
+          echo NEXT_PUBLIC_TEMPLATE_ID= ${{secrets.NEXT_PUBLIC_TEMPLATE_ID}} >> .env.local
+          echo NEXT_PUBLIC_USER_ID= ${{secrets.NEXT_PUBLIC_USER_ID}} >> .env.local
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -87,10 +93,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
-    env:
-      NEXT_PUBLIC_SERVICE_ID: ${{secrets.NEXT_PUBLIC_SERVICE_ID}}
-      NEXT_PUBLIC_TEMPLATE_ID: ${{secrets.NEXT_PUBLIC_TEMPLATE_ID}}
-      NEXT_PUBLIC_USER_ID: ${{secrets.NEXT_PUBLIC_USER_ID}}
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
