@@ -12,7 +12,6 @@ import emailjs from "emailjs-com";
 const serviceId = process.env.NEXT_PUBLIC_SERVICE_ID ;
 const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID;
 const userId = process.env.NEXT_PUBLIC_USER_ID;
-console.log(serviceId,templateId)
 export default function Contact() {
     const form = useRef();
     const [texts] = useState({
@@ -21,6 +20,7 @@ export default function Contact() {
     });
 
     const sendEmail = (e) => {
+        console.log(serviceId,templateId)
         e.preventDefault();
 
         emailjs.sendForm(serviceId,templateId, form.current, userId )
