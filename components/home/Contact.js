@@ -20,7 +20,7 @@ export default function Contact() {
     });
 
     const sendEmail = (e) => {
-        console.log(serviceId,templateId)
+
         e.preventDefault();
 
         emailjs.sendForm(serviceId,templateId, form.current, userId )
