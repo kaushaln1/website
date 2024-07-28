@@ -26,7 +26,7 @@ export default function WorkDesktop() {
             title: "KubeControl App",
             description:
                 "Created a containerized application deployment platform using EKS (Amazon Elastic Kubernetes Service) and Kubernetes to host a variety of applications. Programmed an application using React.js for frontend development and Flask as backend server to call Kubernetes APIs. Increased management of deployed apps via a user-friendly UI, reduced deployment time, and provided a scalable, easy-to-manage platform.",
-            link: null,
+            link: "https://github.com/kaushaln1/KubeControl/tree/master",
             image: null,
         },
         {
