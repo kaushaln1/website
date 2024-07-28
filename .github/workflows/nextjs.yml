@@ -107,6 +107,6 @@ jobs:
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
           slack-channel: C07D8DM8ZEV
-          slack-text: Hello! Updated website is available at  " ${{ steps.deployment.outputs.page_url }}"  🤓
+          slack-text: Hello! Updated website is available at  ${{ env.url }} :)
       - name: Result from "Send Message"
         run: echo "The result was ${{ steps.notify.outputs.slack-result }}"
