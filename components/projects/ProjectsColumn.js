@@ -22,6 +22,42 @@ function ProjectsColumn() {
                 },
             },
             {
+                backgroundColor: "#FFF1D5",
+                type: "NodeJs App ",
+                title: "<strong>Slack App</strong>",
+                subtitle:
+                    "SlackApp is a Node.js application integrated with Slack. It allows users to request and register their PAR access for production accounts, like a production AWS account, directly within a Slack channel. When a user queries \"who took par?\", the app retrieves and displays the name, email, and time of PAR access from the PAR granting server.",
+                techs: "Node.js  SlackAPI",
+                links: {
+                    github: "https://github.com/kaushaln1/slackApp",
+                    website: "",
+                },
+            },
+            {
+                backgroundColor: "#FFE2E2",
+                type: "CI/CD",
+                title: "<strong>End to End deployment Pipeline</strong>",
+                subtitle:
+                    "Project is to setup a Jenkins pipeline to automate the entire process of building, testing, and deploying a Spring Boot application from Git to a local Kubernetes cluster. It ensures consistent and reliable deployments, improves code quality with integrated testing and security scans, and simplifies the management of Kubernetes applications, addressing the complexities of continuous integration and continuous deployment (CI/CD).\n",
+                techs: "Jenkins Git Maven Trivy SonarQube Docker Helm Kubernetes",
+                links: {
+                    github: "https://github.com/kaushaln1/End_to_End_pipeline_scripts",
+                    website: "",
+                },
+            },
+            {
+                backgroundColor: "#FFF1D5",
+                type: "Kong Gateway Demo",
+                title: "<strong>Kong Gateway with k8s</strong>",
+                subtitle:
+                    "This project is about configurations and scripts to deploy and manage Kong API Gateway on a Kubernetes cluster. It demonstrates Kong's use in a microservice architecture, including setup via Helm, configuration in DB-less mode, and testing routes with a bundled echo server.",
+                techs: "",
+                links: {
+                    github: "https://github.com/kaushaln1/KongGateway_k8s",
+                    website: "",
+                },
+            },
+            {
                 backgroundColor: "#FFE2E2",
                 type: "Team Project",
                 title: "<strong>Platform setup</strong>",

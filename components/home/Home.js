@@ -1,5 +1,6 @@
 import ImagePreview from "../visual/AppPreview";
 import { useState, useEffect, useRef } from "react";
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 /**
  *
@@ -27,13 +28,20 @@ export default function Home() {
             <div className="intro">
                 <div className="content">
                     <h1>{texts.title}</h1>
-                    <p
-                        dangerouslySetInnerHTML={{ __html: texts.subtitle }}
+                    <p dangerouslySetInnerHTML={{__html: texts.subtitle}}
                     ></p>
+                    <div className="social-links">
+                        <a href="https://github.com/kaushaln1" target="_blank" rel="noopener noreferrer">
+                            <FaGithub/>
+                        </a>
+                        <a href="https://www.linkedin.com/in/kaushalnerkar/" target="_blank" rel="noopener noreferrer">
+                            <FaLinkedin/>
+                        </a>
+                    </div>
                 </div>
                 <div className="preview-container shown-preview">
                     <div className="preview-inner">
-                        <ImagePreview />
+                        <ImagePreview/>
                     </div>
                 </div>
             </div>
@@ -101,6 +109,21 @@ export default function Home() {
                     position: relative;
                     top: calc(var(--scroll-page) * -250px);
                 }
+                .social-links {
+                    display: flex;
+                    gap: 1rem;
+                    margin-top: 1.5vw;
+                }
+
+                .social-links a {
+                    color: #fff;
+                    font-size: 2rem;
+                    transition: color 0.3s ease;
+                }
+
+                .social-links a:hover {
+                    color: #00aaff;
+                }
 
                 @media screen AND (min-width: 992px) {
                     .preview-container {
@@ -155,6 +178,21 @@ export default function Home() {
                         font-weight: 300;
                         text-align: center;
                     }
+                    .social-links {
+                        display: flex;
+                        gap: 1rem;
+                        margin-top: 1.5vw;
+                    }
+
+                    .social-links a {
+                        color: #fff;
+                        font-size: 2rem;
+                        transition: color 0.3s ease;
+                    }
+
+                    .social-links a:hover {
+                        color: #00aaff;
+                    }
 
                     .preview-inner {
                         max-width: 75%;
@@ -200,6 +238,21 @@ export default function Home() {
                         padding: 0 15px;
                         font-weight: 300;
                         text-align: center;
+                    }
+                    .social-links {
+                        display: flex;
+                        gap: 1rem;
+                        margin-top: 1.5vw;
+                    }
+
+                    .social-links a {
+                        color: #fff;
+                        font-size: 2rem;
+                        transition: color 0.3s ease;
+                    }
+
+                    .social-links a:hover {
+                        color: #00aaff;
                     }
                 }
             `}</style>

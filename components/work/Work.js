@@ -30,6 +30,29 @@ export default function WorkDesktop() {
             image: null,
         },
         {
+            title: "Slack App",
+            description:
+                "SlackApp is a Node.js application integrated with Slack. It allows users to request and register their PAR access for production accounts, like a production AWS account, directly within a Slack channel. When a user queries \"who took par?\", the app retrieves and displays the name, email, and time of PAR access from the PAR granting server.",
+            link: "https://github.com/kaushaln1/slackApp",
+            image: null
+        },
+        {
+
+            title: "End to End deployment Pipeline",
+            description:
+                "Project is to setup a Jenkins pipeline to automate the entire process of building, testing, and deploying a Spring Boot application from Git to a local Kubernetes cluster. It ensures consistent and reliable deployments, improves code quality with integrated testing and security scans, and simplifies the management of Kubernetes applications, addressing the complexities of continuous integration and continuous deployment (CI/CD).\n",
+            link: "https://github.com/kaushaln1/End_to_End_pipeline_scripts",
+        },
+        {
+
+            title: "Kong Gateway with k8s",
+            description:
+                "This project is about configurations and scripts to deploy and manage Kong API Gateway on a Kubernetes cluster. It demonstrates Kong's use in a microservice architecture, including setup via Helm, configuration in DB-less mode, and testing routes with a bundled echo server.",
+
+            link:  "https://github.com/kaushaln1/KongGateway_k8s",
+
+        },
+        {
             title: "A2CW (Automated API Compliance Watch)",
             description:
                 "Owned development of the CI/CD pipeline, enabling continuous application deployment on Kubernetes and designing the Cloud Connectivity Pattern for seamless AWS Aurora DB integration. Led the configuration of AppDynamics, Splunk, and DataDog for comprehensive application performance monitoring and troubleshooting. Contributed to the design and development of features within A2CW's Self-Compliance Tool, optimizing batch jobs for bulk data processing.",

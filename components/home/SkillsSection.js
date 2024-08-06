@@ -60,7 +60,7 @@ const SkillsSection = () => {
                 <div className="resume-download">
                     <a href="/Kaushal_resume.pdf"  download>
                         <button className="download-button">
-                            Download Resume <FontAwesomeIcon icon={faDownload} size={"2xs"} />
+                            Download Resume <FontAwesomeIcon icon={faDownload} size={"xl"}  />
                         </button>
                     </a>
                 </div>
