@@ -18,6 +18,13 @@ export default function SimpleAccordion() {
     const [questions] = useState({
         questions: [
             {
+                questionTitle: "Linvest21, Ai Intern | Remote, September 2024 – Present",
+                questionDescription: `● Designed and implemented a data collection pipeline using Apache Airflow and AWS Lambda, automating financial data ingestion and improving real-time data processing.<br>
+          ● Developed an AI-driven chatbot with LangGraph and real-time voice capabilities, enabling users to interact with investment insights through natural language and speech.<br>
+          ● Designed and delivered the Investor Intelligence system, integrating market trends, stock data, and client insights using LangGraph and LangChain to enhance financial decision-making.<br>
+          ● Built a scalable and modular architecture for Investor Intelligence, ensuring efficient data retrieval, processing, and AI-driven analysis for personalized financial insights.`,
+            },
+            {
                 questionTitle: "HSBC Software Development India, Senior Software Developer | Pune, Maharashtra July 2019 – July 2023",
                 questionDescription: `● Designed, developed, and maintained Java SpringBoot applications to support debit history retrieval and balance management.<br>
           ● Orchestrated scalable, highly available, and fault-tolerant containerized deployments with Kubernetes.<br>
