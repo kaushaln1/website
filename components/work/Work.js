@@ -23,6 +23,13 @@ export default function WorkDesktop() {
 
     const projects = [
         {
+            title: "Terraform Code Generator with AI & RAG",
+            description:
+                "Developed an AI-powered Terraform code generator using Retrieval-Augmented Generation (RAG) and LLMs, automating Infrastructure-as-Code (IAc) creation",
+            link: null,
+            image: null,
+        },
+        {
             title: "KubeControl App",
             description:
                 "Created a containerized application deployment platform using EKS (Amazon Elastic Kubernetes Service) and Kubernetes to host a variety of applications. Programmed an application using React.js for frontend development and Flask as backend server to call Kubernetes APIs. Increased management of deployed apps via a user-friendly UI, reduced deployment time, and provided a scalable, easy-to-manage platform.",
