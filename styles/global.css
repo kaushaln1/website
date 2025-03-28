@@ -1,30 +1,30 @@
 @font-face {
-  font-family: 'Visby';
-  src: url(/fonts/VisbyLight.otf) format('opentype');
+  font-family: 'Quicksand';
+  src: url(/fonts/Quicksand-Light.ttf) format('opentype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Visby';
-  src: url(/fonts/VisbyRegular.otf) format('opentype');
+  font-family: 'Quicksand';
+  src: url(/fonts/Quicksand-Regular.ttf) format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Visby';
-  src: url(/fonts/VisbyMedium.otf) format('opentype');
+  font-family: 'Quicksand';
+  src: url(/fonts/Quicksand-Medium.ttf) format('opentype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Visby';
-  src: url(/fonts/VisbyBold.otf) format('opentype');
+  font-family: 'Quicksand';
+  src: url(/fonts/Quicksand-Bold.ttf) format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
