@@ -54,7 +54,7 @@ export default function Blogs() {
                 }
 
                 section .content h2 {
-                    font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
                     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
                     font-style: normal;
                     font-weight: 300;
@@ -66,7 +66,7 @@ export default function Blogs() {
                 }
 
                 section .content p {
-                    font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
                     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
                     font-style: normal;
                     font-weight: 300;
@@ -103,7 +103,7 @@ export default function Blogs() {
                 }
 
                 section .card h3 {
-                    font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
                     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
                     font-style: normal;
                     font-weight: 500;

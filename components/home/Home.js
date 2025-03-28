@@ -65,7 +65,7 @@ export default function Home() {
 
                 .intro .content h1 {
                     opacity: 1;
-                    font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
                     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
                     font-style: normal;
                     font-weight: 500;
@@ -80,7 +80,7 @@ export default function Home() {
 
                 .intro .content p {
                     opacity: 1;
-                    font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
                     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
                     font-style: normal;
                     font-weight: 300;
@@ -258,7 +258,7 @@ export default function Home() {
             `}</style>
             <style jsx global>{`
         .intro .content .action span strong {
-          font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
             Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
           font-style: normal;
           font-weight: 400;

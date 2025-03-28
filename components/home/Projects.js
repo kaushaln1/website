@@ -34,7 +34,7 @@ export default function Projects() {
           padding: 35px 22px;
         }
         section .heading h2 {
-          font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
             Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
           font-style: normal;
           font-weight: 300;
@@ -47,7 +47,7 @@ export default function Projects() {
         }
 
         section .heading p {
-          font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
             Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
           font-style: normal;
           font-weight: 300;
