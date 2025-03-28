@@ -67,7 +67,7 @@ export default function SimpleAccordion() {
                                     fontSize: "18px",
                                     fontWeight: "500",
                                     lineHeight: "24px",
-                                    fontFamily: "Visby",
+                                    fontFamily: "Quicksand",
                                 }}
                             >
                                 {item.questionTitle}
@@ -79,7 +79,7 @@ export default function SimpleAccordion() {
                                     color: "#ffffff",
                                     fontSize: "16px",
                                     lineHeight: "24px",
-                                    fontFamily: "Visby",
+                                    fontFamily: "Quicksand",
                                 }}
                                 dangerouslySetInnerHTML={{ __html: item.questionDescription }}
                             />

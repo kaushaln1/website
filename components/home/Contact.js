@@ -64,7 +64,7 @@ export default function Contact() {
         }
 
         section .content h2 {
-          font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
             Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
           font-style: normal;
           font-weight: 300;
@@ -76,7 +76,7 @@ export default function Contact() {
         }
 
         section .content p {
-          font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
             Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
           font-style: normal;
           font-weight: 300;

@@ -35,7 +35,7 @@ export default function Hero({ title, subtitle, background, backgroundStyle, sty
         }
 
         .container h2 {
-          font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
             Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
           font-style: normal;
           font-weight: 500;
@@ -49,7 +49,7 @@ export default function Hero({ title, subtitle, background, backgroundStyle, sty
         }
 
         .container h5 {
-          font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
             Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
           font-style: normal;
           font-weight: 400;

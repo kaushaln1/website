@@ -26,7 +26,7 @@ export default function CommonFooter() {
                 }
 
                 footer h2 {
-                    font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
                     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
                     font-style: normal;
                     font-weight: 200;
@@ -49,7 +49,7 @@ export default function CommonFooter() {
                     }
 
                     footer h2 {
-                        font-family: Visby, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                        font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
                         Helvetica, Arial, sans-serif, "Apple Color Emoji",
                         "Segoe UI Emoji";
                         font-style: normal;
