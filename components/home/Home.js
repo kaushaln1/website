@@ -13,14 +13,9 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 export default function Home() {
     const [texts] = useState({
-        title: "Kaushal Vinay Nerkar",
+        title: "Kaushal | MLOps & ML Engineer",
         subtitle:
-            "Welcome to my portfolio! I'm Kaushal Nerkar, a software developer with expertise in Java SpringBoot, Kubernetes, and AWS. <br\>" +
-            "I've developed scalable and efficient solutions, optimizing performance and deployment processes."
-        // "<br/>Passionate about innovative tech solutions. " +
-        // "<br\>Explore my work to see my journey and contributions." +
-        //
-        // "<br/><br/> Jack of all trades, master of none, but often times better than a master of one.",
+            "I’m Kaushal — an engineer building production-grade ML systems and end-to-end MLOps pipelines that are scalable, observable, and reproducible."
     });
 
     return (

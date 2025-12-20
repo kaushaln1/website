@@ -11,19 +11,34 @@ import { useState } from "react";
 
 export default function Blogs() {
     const [texts] = useState({
-        title: `<strong>Blogs,</strong> my thoughts and insights`,
-        subtitle: `Explore my latest articles and thoughts on various topics.`,
+        title: `<strong>Blogs & Case Studies,</strong> technical deep dives`,
+        subtitle: `Explore my latest technical articles, system design case studies, and certification experiences.`,
     });
 
     const blogPosts = [
         {
+            title: "Designing a Drift-Resilient ML System",
+            image: "aws_medium.png", 
+            link: "#",
+        },
+        {
+            title: "Why ML Systems Fail in Production",
+            image: "aws_medium.png",
+            link: "#",
+        },
+        {
+            title: "Cost Tradeoffs in Real-Time ML",
+            image: "aws_medium.png",
+            link: "#",
+        },
+        {
             title: "My Experience with AWS Developer Associate Certification",
-            image: "aws_medium_2.gif", // Replace with actual image URL
+            image: "aws_medium.png",
             link: "https://medium.com/@kaushalv.nerkar/my-experience-with-aws-developer-associate-certification-356ba9f656db",
         },
         {
             title: "My Terraform Developer Associate Certification Experience!",
-            image: "aws_medium_1.gif", // Replace with actual image URL
+            image: "aws_medium.png",
             link: "https://medium.com/aws-tip/my-terraform-developer-associate-certification-experience-35b55c2e7fb",
         },
     ];
@@ -36,10 +51,18 @@ export default function Blogs() {
                     <p dangerouslySetInnerHTML={{ __html: texts.subtitle }}></p>
                     <div className="cards">
                         {blogPosts.map((post, index) => (
-                            <div className="card" key={index} onClick={() => window.open(post.link, "_blank")}>
-                                <img src={post.image} alt={post.title} />
-                                <h3>{post.title}</h3>
-                            </div>
+                            post.link !== "#" ? (
+                                <a href={post.link} target="_blank" rel="noopener noreferrer" className="card" key={index}>
+                                    <img src={post.image} alt={post.title} />
+                                    <h3>{post.title}</h3>
+                                </a>
+                            ) : (
+                                <div className="card" key={index}>
+                                    <img src={post.image} alt={post.title} />
+                                    <h3>{post.title}</h3>
+                                    <span className="coming-soon">Coming Soon</span>
+                                </div>
+                            )
                         ))}
                     </div>
                 </div>
@@ -50,7 +73,7 @@ export default function Blogs() {
                     display: flex;
                     flex-direction: column;
                     padding: 4vw 5.103vw 2vw 10.317vw;
-                    background-color: #384242;
+                    background-color: #2d3436;
                 }
 
                 section .content h2 {
@@ -79,27 +102,41 @@ export default function Blogs() {
 
                 section .cards {
                     display: flex;
-                    justify-content: space-between; /* Adjust as needed */
+                    flex-wrap: wrap; /* Allow wrapping */
+                    justify-content: flex-start; /* Align left */
+                    gap: 2%; /* Gap between cards */
                     margin-top: 2vw;
                 }
 
                 section .card {
-                    background-color: #f8f9fa; /* Card background color */
+                    background-color: #f8f9fa;
                     border-radius: 8px;
                     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                    width: 45%; /* Adjust width as needed */
+                    width: 31%; /* 3 cards per row approx */
                     cursor: pointer;
-                    transition: transform 0.3s;
+                    transition: box-shadow 0.3s;
+                    margin-bottom: 20px;
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    text-decoration: none; /* For anchor tags */
                 }
 
                 section .card:hover {
-                    transform: scale(1.05);
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
                 }
 
                 section .card img {
                     width: 100%;
+                    height: 200px; /* Fixed height for consistency */
+                    object-fit: cover;
                     border-top-left-radius: 8px;
                     border-top-right-radius: 8px;
+                    transition: opacity 0.3s;
+                }
+
+                section .card:hover img {
+                    opacity: 0.9;
                 }
 
                 section .card h3 {
@@ -107,51 +144,38 @@ export default function Blogs() {
                     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
                     font-style: normal;
                     font-weight: 500;
-                    font-size: 1.8vw; /* Adjust as needed */
-                    line-height: 122%;
+                    font-size: 1.2vw;
+                    line-height: 1.4;
                     color: #2d3436;
-                    padding: 10px;
+                    padding: 15px;
                     margin: 0;
+                    flex-grow: 1;
+                }
+                
+                .coming-soon {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background: #ff7675;
+                    color: white;
+                    padding: 4px 8px;
+                    border-radius: 4px;
+                    font-size: 0.8em;
+                    font-weight: bold;
                 }
 
                 @media screen and (max-width: 992px) {
                     section .card {
-                        width: 100%; /* Stack cards on smaller screens */
-                        margin-bottom: 20px;
+                        width: 48%; /* 2 cards per row */
+                    }
+                    section .card h3 {
+                        font-size: 16px;
                     }
                 }
 
-                @media screen AND (max-width: 526px) {
-                    section .content ul li img {
-                        width: 6vw;
-                        height: 4.5vw;
-                    }
-                }
-
-                @media screen AND (min-width: 526px) AND (max-width: 992px) {
-                    section .content h2 {
-                        font-size: 35px;
-                    }
-
-                    section .content p {
-                        font-size: 20px;
-                        line-height: 30px;
-                    }
-
-                    section .content > ul li span {
-                        font-size: 20px;
-                        line-height: 30px;
-                    }
-
-                    section .content ul li img {
-                        width: 4vw;
-                        height: 3.5vw;
-                    }
-                }
-
-                @media screen AND (min-width: 993px) AND (max-width: 1199px) {
-                    section .content .primary-button {
-                        width: 13.5vw;
+                @media screen and (max-width: 600px) {
+                     section .card {
+                        width: 100%; /* 1 card per row */
                     }
                 }
             `}</style>

@@ -80,17 +80,17 @@ export default function Navigation({
                 <ul className="menu">
                     <li className="secondary">
                         <Link activeClass="active" smooth spy to="home">
-                            home
+                            Home
                         </Link>
                     </li>
                     <li className="secondary">
                         <Link activeClass="active" smooth spy to="skills">
-                            resume & skills
+                            Skills
                         </Link>
                     </li>
                     <li className="secondary">
                         <Link activeClass="active" smooth spy to="portfolio">
-                            portfolio
+                            Projects
                         </Link>
                     </li>
                     <li className="secondary">
@@ -100,12 +100,12 @@ export default function Navigation({
                     </li>
                     <li className="secondary">
                         <Link activeClass="active" smooth spy to="blogs">
-                            blogs
+                            Blogs
                         </Link>
                     </li>
                     <li className="secondary">
                         <Link activeClass="active" smooth spy to="contact">
-                            contact
+                            Contact
                         </Link>
                     </li>
                 </ul>
@@ -118,32 +118,32 @@ export default function Navigation({
                     <ul>
                         <li className="secondary">
                             <Link activeClass="active" smooth spy to="home">
-                                home
+                                Home
                             </Link>
                         </li>
                         <li className="secondary">
                             <Link activeClass="active" smooth spy to="skills">
-                                resume & skills
+                                Skills
                             </Link>
                         </li>
                         <li className="secondary">
                             <Link activeClass="active" smooth spy to="portfolio">
-                                portfolio
+                                Projects
                             </Link>
                         </li>
                         <li className="secondary">
                             <Link activeClass="active" smooth spy to="experience">
-                                experience
+                                Experience
                             </Link>
                         </li>
                         <li className="secondary">
                             <Link activeClass="active" smooth spy to="blogs">
-                                blogs
+                                Blogs
                             </Link>
                         </li>
                         <li className="secondary">
                             <Link activeClass="active" smooth spy to="contact">
-                                contact
+                                Contact
                             </Link>
                         </li>
                     </ul>
@@ -186,10 +186,11 @@ export default function Navigation({
         }
 
         nav.sticky.dim {
-          background: hsl(0deg 0% 100% / 15%);
+          background: #2d3436;
           -webkit-backdrop-filter: blur(2rem) brightness(1);
           backdrop-filter: blur(2rem) brightness(1);
           box-shadow: 0px 1px 6px #0000000a;
+          border-bottom: 1px solid #1e272e;
         }
 
         nav .home-logo {
@@ -198,16 +199,21 @@ export default function Navigation({
         }
 
         nav.sticky.dim a img {
-          display: none;
+          display: flex;
         }
 
         nav.sticky.dim a img.colored {
-          display: flex;
+          display: none;
         }
 
         nav.sticky.dim ul li.secondary a,
         nav.sticky.dim ul li.primary p {
-          color: #2d3436;
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        nav.sticky.dim ul li.secondary a:hover,
+        nav.sticky.dim ul li.primary p:hover {
+          color: var(--title-color);
         }
 
         nav .mobile-menu ul li p {

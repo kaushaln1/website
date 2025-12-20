@@ -30,21 +30,21 @@ const SkillsSection = () => {
     });
 
     const skillsData = [
-        { name: 'React', icon: <ReactOriginal size="100" /> },
-        { name: 'Node.js', icon: <NodejsOriginalWordmark size="100" /> },
-        { name: 'Python', icon: <PythonOriginal size="100" /> },
-        { name: 'Go', icon: <GoOriginal size="100" /> },
-        { name: 'Java', icon: <JavaOriginalWordmark size="100" /> },
-        { name: 'AWS', icon: <AmazonwebservicesOriginalWordmark size="100" /> },
-        { name: 'Git', icon: <GitOriginal size="100" /> },
-        { name: 'Flask', icon: <FlaskOriginal size="100" /> },
-        { name: 'Kubernetes', icon: <KubernetesOriginal size="100" /> },
-        { name: 'Terraform', icon: <TerraformPlainWordmark size="100" /> },
-        { name: 'SQL', icon: <PostgresqlOriginalWordmark size="100" /> },
-        { name: 'Jenkins', icon: <JenkinsOriginal size="100" /> },
-        { name: 'Splunk', icon: <SplunkOriginalWordmark size="100" /> },
-        { name: 'Helm', icon: <HelmOriginal size="100" /> },
-        { name: 'Grafana', icon: <GrafanaOriginalWordmark size="100" /> },
+        { name: 'React', icon: <ReactOriginal size="80" /> },
+        { name: 'Node.js', icon: <NodejsOriginalWordmark size="80" color="#fff" /> },
+        { name: 'Python', icon: <PythonOriginal size="80" /> },
+        { name: 'Go', icon: <GoOriginal size="80" /> },
+        { name: 'Java', icon: <JavaOriginalWordmark size="80" /> },
+        { name: 'AWS', icon: <AmazonwebservicesOriginalWordmark size="80" /> },
+        { name: 'Git', icon: <GitOriginal size="80" /> },
+        { name: 'Flask', icon: <FlaskOriginal size="80" color="#fff" /> },
+        { name: 'Kubernetes', icon: <KubernetesOriginal size="80" /> },
+        { name: 'Terraform', icon: <TerraformPlainWordmark size="80" color="#fff" /> },
+        { name: 'SQL', icon: <PostgresqlOriginalWordmark size="80" /> },
+        { name: 'Jenkins', icon: <JenkinsOriginal size="80" /> },
+        { name: 'Splunk', icon: <SplunkOriginalWordmark size="80" /> },
+        { name: 'Helm', icon: <HelmOriginal size="80" /> },
+        { name: 'Grafana', icon: <GrafanaOriginalWordmark size="80" /> },
     ];
 
     return (
@@ -60,7 +60,7 @@ const SkillsSection = () => {
                 <div className="resume-download">
                     <a href="/Kaushal_resume.pdf"  download>
                         <button className="download-button">
-                            Download Resume <FontAwesomeIcon icon={faDownload} size={"xl"}  />
+                            Download Resume <FontAwesomeIcon icon={faDownload} size={"lg"} className="icon" />
                         </button>
                     </a>
                 </div>
@@ -79,23 +79,7 @@ const SkillsSection = () => {
                     display: flex;
                     flex-direction: column;
                     padding: 4vw 5.103vw 2vw 10.317vw;
-                    background-color: #ffffff;
-                }
-
-                section .media {
-                    width: 49vw;
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                }
-
-                section .content {
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                section .accordion {
-                    width: 100%;
+                    background-color: #2d3436;
                 }
 
                 section .content h2 {
@@ -105,7 +89,7 @@ const SkillsSection = () => {
                     font-weight: 300;
                     font-size: 3.43391vw;
                     line-height: 122%;
-                    color: #2d3436;
+                    color: #ffffff;
                     margin-bottom: 2.513vw;
                     animation-delay: 0s;
                 }
@@ -117,79 +101,102 @@ const SkillsSection = () => {
                     font-weight: 300;
                     font-size: 1.5873vw;
                     line-height: 140%;
-                    color: #2d3436;
+                    color: #dfe6e9;
                     margin-bottom: 2.513vw;
                     animation-delay: 0.3s;
                 }
 
-                section .content .primary-button {
-                    width: 11.78407vw;
-                    animation-delay: 0.6s;
+                .skills-section {
+                    position: relative;
+                    padding-bottom: 5vw;
+                    background-color: #2d3436;
                 }
 
-                section .content .primary-button.mobile {
-                    display: none;
-                    animation-delay: 1.8s;
-                }
-
-                section .content ul {
+                .resume-download {
                     display: flex;
-                    flex-direction: row;
-                    margin-top: 5.621vw;
+                    justify-content: center;
+                    margin-bottom: 2vw;
+                    width: 100%;
                 }
 
-                section .content ul li {
+                .download-button {
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    padding: 12px 35px;
+                    font-size: 1.1rem;
+                    background-color: transparent;
+                    color: #0984e3;
+                    border: 1px solid #0984e3;
+                    border-radius: 50px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    font-family: Quicksand, sans-serif;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+
+                .download-button:hover {
+                    background-color: #0984e3;
+                    color: white;
+                    box-shadow: 0 0 15px rgba(9, 132, 227, 0.4);
+                }
+
+                .line-container {
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 4vw;
+                }
+
+                .line {
+                    width: 80%;
+                    height: 1px;
+                    background-color: #636e72;
+                    opacity: 0.3;
+                }
+
+                .skills-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 20px;
+                    padding: 0 5vw;
+                }
+
+                :global(.skill-card) {
                     display: flex;
                     flex-direction: column;
-                    width: 19.31216vw;
-                    margin-right: 3.83597vw;
+                    align-items: center;
+                    justify-content: center;
+                    width: 140px;
+                    height: 140px;
+                    background: #1e272e;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+                    border: 1px solid #2d3436;
+                    transition: transform 0.2s;
                 }
 
-                section .content ul li:nth-child(1) {
-                    animation-delay: 0.9s;
+                :global(.skill-card:hover) {
+                    transform: translateY(-5px);
+                    border-color: #0984e3;
                 }
 
-                section .content ul li:nth-child(2) {
-                    animation-delay: 1.2s;
-                }
-
-                section .content ul li:nth-child(3) {
-                    animation-delay: 1.5s;
-                }
-
-                section .content ul li:last-child {
-                    margin-right: 0;
-                }
-
-                section .content ul li img {
-                    width: 1.917vw;
-                    height: 1.322vw;
-                    margin-bottom: 1.851vw;
-                }
-
-                section .content ul span {
-                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-                    font-style: normal;
-                    font-weight: 300;
-                    font-size: 1.32275vw;
-                    line-height: 130%;
-                    color: #a0a0aa;
+                :global(.skill-card p) {
+                    margin-top: 15px;
+                    font-family: Quicksand, sans-serif;
+                    font-size: 1rem;
+                    color: #dfe6e9;
+                    text-align: center;
+                    font-weight: 500;
                 }
 
                 @media screen and (max-width: 992px) {
                     section {
                         padding: 35px 22px;
                     }
-
-                    section > .media {
-                        display: none;
-                    }
-
-                    section .content {
-                        width: 100%;
-                    }
-
+                    
                     section .content h2 {
                         font-size: 29px;
                         line-height: 122%;
@@ -203,73 +210,20 @@ const SkillsSection = () => {
                         width: 100%;
                         margin-bottom: 32px;
                     }
-
-                    section .content > .primary-button {
-                        display: none;
+                    
+                    .skills-container {
+                        gap: 15px;
                     }
-
-                    section .content > .primary-button.mobile {
-                        display: flex;
-                        width: 100%;
-                        justify-content: center;
-                        margin-top: 13px;
-                        height: 45px;
-                        font-size: min(5vw, 24px);
-                    }
-
-                    section .content > ul {
-                        flex-direction: column;
-                        margin-top: 0;
-                    }
-
-                    section .content > ul li {
-                        width: 100%;
-                        margin-right: 0;
-                        flex-direction: row-reverse;
-                        justify-content: space-between;
-                        padding: 17px 0 28px 0;
-                        border-top: 1px solid #eeeef2;
-                    }
-
-                    section .content > ul li span {
-                        font-size: 15px;
-                        line-height: 20px;
-                        width: 70%;
+                    
+                    :global(.skill-card) {
+                        width: 110px;
+                        height: 110px;
                     }
                 }
-
-                @media screen AND (max-width: 526px) {
-                    section .content ul li img {
-                        width: 6vw;
-                        height: 4.5vw;
-                    }
-                }
-
-                @media screen AND (min-width: 526px) AND (max-width: 992px) {
-                    section .content h2 {
-                        font-size: 35px;
-                    }
-
-                    section .content p {
-                        font-size: 20px;
-                        line-height: 30px;
-                    }
-
-                    section .content > ul li span {
-                        font-size: 20px;
-                        line-height: 30px;
-                    }
-
-                    section .content ul li img {
-                        width: 4vw;
-                        height: 3.5vw;
-                    }
-                }
-
-                @media screen AND (min-width: 993px) AND (max-width: 1199px) {
-                    section .content .primary-button {
-                        width: 13.5vw;
-                    }
+            `}</style>
+            <style jsx global>{`
+                #skills strong {
+                    font-weight: 500;
                 }
             `}</style>
         </>

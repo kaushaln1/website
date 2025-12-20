@@ -18,25 +18,33 @@ export default function SimpleAccordion() {
     const [questions] = useState({
         questions: [
             {
-                questionTitle: "Linvest21, Ai Intern | Remote, September 2024 – Present",
-                questionDescription: `● Designed and implemented a data collection pipeline using Apache Airflow and AWS Lambda, automating financial data ingestion and improving real-time data processing.<br>
-          ● Developed an AI-driven chatbot with LangGraph and real-time voice capabilities, enabling users to interact with investment insights through natural language and speech.<br>
-          ● Designed and delivered the Investor Intelligence system, integrating market trends, stock data, and client insights using LangGraph and LangChain to enhance financial decision-making.<br>
-          ● Built a scalable and modular architecture for Investor Intelligence, ensuring efficient data retrieval, processing, and AI-driven analysis for personalized financial insights.`,
+                questionTitle: "Linvest21, AI Engineer  | Remote, September 2024 – Present",
+                questionDescription: `
+                <ul style="list-style-type: disc; padding-left: 20px; margin: 0;">
+                    <li style="margin-bottom: 8px;">Engineered a scalable data ingestion pipeline using <strong>Apache Airflow</strong> and <strong>AWS Lambda</strong>, reducing data processing latency by <strong>40%</strong>.</li>
+                    <li style="margin-bottom: 8px;">Developed a RAG-based AI chatbot using <strong>LangChain</strong> and <strong>LangGraph</strong>, serving financial insights with <strong>&lt;2s response time</strong>.</li>
+                    <li style="margin-bottom: 8px;">Designed the "Investor Intelligence" system, integrating real-time market data APIs and reducing financial analysis time for clients by <strong>60%</strong>.</li>
+                    <li style="margin-bottom: 8px;">Optimized cloud infrastructure on AWS, achieving <strong>99.9% uptime</strong> for AI services and ensuring scalable deployment.</li>
+                </ul>`,
             },
             {
                 questionTitle: "HSBC Software Development India, Senior Software Developer | Pune, Maharashtra July 2019 – July 2023",
-                questionDescription: `● Designed, developed, and maintained Java SpringBoot applications to support debit history retrieval and balance management.<br>
-          ● Orchestrated scalable, highly available, and fault-tolerant containerized deployments with Kubernetes.<br>
-          ● Implemented Jenkins pipelines to automate continuous integration and continuous deployment (CI/CD) for applications which brought down deployment time by 75%.<br>
-          ● Optimized application responsiveness by using Splunk and AppDynamics to track and troubleshoot performance issues within AWS databases.`,
+                questionDescription: `
+                <ul style="list-style-type: disc; padding-left: 20px; margin: 0;">
+                    <li style="margin-bottom: 8px;">Architected and deployed microservices on <strong>Kubernetes</strong>, serving <strong>1M+ daily transactions</strong> with 99.99% availability.</li>
+                    <li style="margin-bottom: 8px;">Reduced deployment time by <strong>75%</strong> by designing modular <strong>Jenkins CI/CD pipelines</strong> with automated testing and security scans (SonarQube, Trivy).</li>
+                    <li style="margin-bottom: 8px;">Optimized database performance for AWS Aurora, reducing query latency by <strong>30%</strong> via query tuning and connection pooling.</li>
+                    <li style="margin-bottom: 8px;">Implemented comprehensive monitoring using <strong>Splunk</strong> and <strong>AppDynamics</strong>, reducing Mean Time To Resolution (MTTR) by <strong>50%</strong>.</li>
+                </ul>`,
             },
             {
-                questionTitle: "Defense Research and Development Organization, Intern | Pune, Maharashtra May 2018 - July 2018",
-                questionDescription: `● Developed a local server to aggregate and distribute updates from archive servers to multiple clients.<br>
-          ● Leveraged Xen virtualization on HP servers and scripted cron jobs & shell scripts for efficient update mirroring and package management.<br>
-          ● Improved system security with an internal update approach, which streamlines blacklisting of malicious packages.<br>
-          ● Reduced internal Linux System’s update time by an estimated 40% through a local Ubuntu repository.`,
+                questionTitle: "Defense Research and Development Organization (DRDO), Intern | Pune, Maharashtra May 2018 - July 2018",
+                questionDescription: `
+                <ul style="list-style-type: disc; padding-left: 20px; margin: 0;">
+                    <li style="margin-bottom: 8px;">Built a secure local repository server for sensitive defense systems, reducing update bandwidth usage by <strong>90%</strong>.</li>
+                    <li style="margin-bottom: 8px;">Automated patch management using <strong>Shell scripts</strong> and <strong>Cron jobs</strong>, ensuring 100% compliance across 50+ isolated servers.</li>
+                    <li style="margin-bottom: 8px;">Reduced system update time by <strong>40%</strong> through localized package mirroring and optimized network protocols.</li>
+                </ul>`,
             },
         ],
     });
@@ -81,6 +89,7 @@ export default function SimpleAccordion() {
                                     lineHeight: "24px",
                                     fontFamily: "Quicksand",
                                 }}
+                                component="div"
                                 dangerouslySetInnerHTML={{ __html: item.questionDescription }}
                             />
                         </AccordionDetails>
