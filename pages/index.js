@@ -1,18 +1,15 @@
-import CommonFooter from "../components/CommonFooter";
-import { useEffect, useState } from "react";
-import Navigation from "../components/Navigation";
+import { useState } from "react";
+import Layout from "../components/Layout";
 import Experience from "../components/home/Experience";
 import Contact from "../components/home/Contact";
 import Work from "../components/work/Work";
-import { BrowserView, MobileView } from "react-device-detect";
-import Projects from "../components/home/Projects";
 import Head from "next/head";
 import parse from "html-react-parser";
 import Home from "../components/home/Home";
-import SkillsSection from "../components/home/SkillsSection";
 import Blogs from "../components/home/Blogs";
 
 export default function Index() {
+  const [activeSection, setActiveSection] = useState('home');
   const [texts] = useState({
     title: `Kaushal | MLOps, ML Engineer`,
     head: `<script type="application/ld+json">
@@ -33,29 +30,22 @@ export default function Index() {
     <meta property="og:title" content="Kaushal Nerkar" />`
   });
 
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("fade-in");
-        } else {
-          entry.target.classList.remove("fade-in");
-        }
-      });
-    });
-
-    const section2 = document.querySelector("#section2");
-    if (section2) {
-      observer.observe(section2);
+  const renderContent = () => {
+    switch (activeSection) {
+      case 'home':
+        return <Home />;
+      case 'experience':
+        return <Experience />;
+      case 'projects':
+        return <Work />;
+      case 'blogs':
+        return <Blogs />;
+      case 'contact':
+        return <Contact />;
+      default:
+        return <Home />;
     }
-
-    setTimeout(() => {
-      const leaderboard = document.querySelector(".vl-leaderboard");
-      if (leaderboard) {
-        leaderboard.style.display = "none";
-      }
-    }, 50);
-  }, []);
+  };
 
   return (
       <>
@@ -68,24 +58,10 @@ export default function Index() {
           <link rel="icon" href="/favicon.png" />
           {parse(texts.head)}
         </Head>
-        <Navigation />
-        <main>
-          <div id="smooth-wrapper">
-            <div id="smooth-content">
-              <section id="home"><Home /></section>
-              <section id="skills"><SkillsSection /></section>
-              <section id="portfolio">
-                <BrowserView><Work /></BrowserView>
-                <MobileView><Projects /></MobileView>
-              </section>
-              <section id="experience"><Experience /></section>
-              <section id="blogs"><Blogs /></section>
-              <section id="contact"><Contact /></section>
-            </div>
-          </div>
-        </main>
-        <CommonFooter />
-        {/*<div id="popup-trigger" data-vl-widget="popupTrigger" style={{ opacity: 0 }}></div>*/}
+        
+        <Layout activeSection={activeSection} setActiveSection={setActiveSection}>
+            {renderContent()}
+        </Layout>
       </>
   );
 }

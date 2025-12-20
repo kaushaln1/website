@@ -1,201 +1,223 @@
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { FaArrowLeft } from "react-icons/fa";
+import SectionHeading from "../SectionHeading";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const ProjectModal = ({ project, onClose }) => {
-    if (!project) return null;
-
+const ProjectDetail = ({ project, onBack }) => {
     return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
-                <button className="close-btn" onClick={onClose}>&times;</button>
-                <h2>{project.title}</h2>
-                <p className="modal-summary">{project.summary}</p>
-                
-                {project.image && <img src={project.image} alt={project.title} />}
-
-                <div className="modal-details">
-                    {project.architecture && (
-                        <div className="detail-row">
-                            <strong>Architecture:</strong>
-                            <p>{project.architecture}</p>
-                        </div>
-                    )}
-                    {project.designDecisions && (
-                        <div className="detail-row">
-                            <strong>Key Design Decisions:</strong>
-                            <ul>
-                                {project.designDecisions.map((d, i) => (
-                                    <li key={i}>{d}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                    {project.failureHandling && (
-                        <div className="detail-row">
-                            <strong>Failure Handling:</strong>
-                            <ul>
-                                {project.failureHandling.map((f, i) => (
-                                    <li key={i}>{f}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                    <div className="detail-row">
-                        <strong>Problem:</strong>
-                        <p>{project.problem}</p>
-                    </div>
-                    <div className="detail-row">
-                        <strong>Stack:</strong>
-                        <p>{project.stack}</p>
-                    </div>
-                    <div className="detail-row">
-                        <strong>Outcome:</strong>
-                        <p>{project.outcome}</p>
-                    </div>
-                    {project.highlights && (
-                        <div className="detail-row">
-                            <strong>Highlights:</strong>
-                            <ul>
-                                {project.highlights.map((h, i) => (
-                                    <li key={i}>{h}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                    {project.link && (
-                         <div className="modal-action">
-                            <a href={project.link} target="_blank" rel="noopener noreferrer">
-                                <button className="modal-explore-btn">
-                                    <span>Visit Project / GitHub</span>
-                                </button>
-                            </a>
-                        </div>
-                    )}
-                </div>
+        <div className="project-detail-view">
+            <button className="back-btn" onClick={onBack}>
+                <FaArrowLeft /> Back to Projects
+            </button>
+            
+            <div className="detail-header">
+                <h1>{project.title}</h1>
+                <p className="summary">{project.summary}</p>
+                {project.image && <img src={project.image} alt={project.title} className="hero-image" />}
             </div>
+
+            <div className="detail-grid">
+                <div className="detail-section">
+                    <h3>Problem</h3>
+                    <p>{project.problem}</p>
+                </div>
+
+                <div className="detail-section">
+                    <h3>Solution & Outcome</h3>
+                    <p>{project.outcome}</p>
+                </div>
+
+                <div className="detail-section full-width">
+                    <h3>Tech Stack</h3>
+                    <p className="stack-text">{project.stack}</p>
+                </div>
+
+                {project.architecture && (
+                    <div className="detail-section full-width">
+                        <h3>Architecture</h3>
+                        <p>{project.architecture}</p>
+                    </div>
+                )}
+
+                {project.designDecisions && (
+                    <div className="detail-section full-width">
+                        <h3>Key Design Decisions</h3>
+                        <ul>
+                            {project.designDecisions.map((d, i) => (
+                                <li key={i}>{d}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
+                {project.failureHandling && (
+                    <div className="detail-section full-width">
+                        <h3>Failure Handling</h3>
+                        <ul>
+                            {project.failureHandling.map((f, i) => (
+                                <li key={i}>{f}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
+                 {project.highlights && (
+                    <div className="detail-section full-width">
+                        <h3>Highlights</h3>
+                        <ul>
+                            {project.highlights.map((h, i) => (
+                                <li key={i}>{h}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+            </div>
+
+            {project.link && (
+                <div className="action-area">
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="visit-btn">
+                        Visit Project / GitHub
+                    </a>
+                </div>
+            )}
+
             <style jsx>{`
-                .modal-overlay {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(0, 0, 0, 0.85);
-                    z-index: 2000;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 20px;
-                    backdrop-filter: blur(5px);
-                }
-                .modal-content {
-                    background: #1e272e;
-                    padding: 40px;
-                    border-radius: 12px;
-                    max-width: 800px;
-                    width: 100%;
-                    max-height: 90vh;
-                    overflow-y: auto;
-                    position: relative;
+                .project-detail-view {
+                    animation: fadeIn 0.3s ease-out;
                     color: #dfe6e9;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-                    border: 1px solid #2d3436;
-                    animation: slideUp 0.3s ease-out;
+                    padding-bottom: 50px;
                 }
-                @keyframes slideUp {
-                    from { transform: translateY(20px); opacity: 0; }
-                    to { transform: translateY(0); opacity: 1; }
+
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(10px); }
+                    to { opacity: 1; transform: translateY(0); }
                 }
-                .close-btn {
-                    position: absolute;
-                    top: 15px;
-                    right: 20px;
+
+                .back-btn {
                     background: transparent;
                     border: none;
-                    color: #b2bec3;
-                    font-size: 2.5rem;
-                    line-height: 1;
+                    color: #74b9ff;
                     cursor: pointer;
-                    transition: color 0.3s;
-                    z-index: 1;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-size: 1rem;
+                    margin-bottom: 30px;
+                    font-family: Quicksand, sans-serif;
+                    padding: 0;
                 }
-                .close-btn:hover {
-                    color: #ff7675;
+
+                .back-btn:hover {
+                    color: #0984e3;
+                    text-decoration: underline;
                 }
-                h2 {
+
+                .detail-header {
+                    margin-bottom: 40px;
+                }
+
+                h1 {
+                    font-size: 2.5rem;
+                    margin-bottom: 15px;
                     color: white;
                     font-family: Quicksand, sans-serif;
-                    margin-bottom: 10px;
-                    font-size: 2rem;
-                    margin-top: 0;
+                    font-weight: 700;
                 }
-                .modal-summary {
-                    font-size: 1.1em;
+
+                .summary {
+                    font-size: 1.2rem;
                     color: #b2bec3;
-                    margin-bottom: 25px;
-                    line-height: 1.5;
-                    border-bottom: 1px solid #2d3436;
-                    padding-bottom: 15px;
+                    margin-bottom: 30px;
+                    line-height: 1.6;
                 }
-                img {
+
+                .hero-image {
                     width: 100%;
-                    height: auto;
-                    border-radius: 8px;
-                    margin-bottom: 20px;
+                    max-height: 400px;
+                    object-fit: cover;
+                    border-radius: 12px;
+                    border: 1px solid #2d3436;
                 }
-                .detail-row {
-                    margin-bottom: 20px;
+
+                .detail-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 30px;
+                    margin-bottom: 40px;
                 }
-                .detail-row strong {
-                    display: block;
-                    margin-bottom: 8px;
+
+                .detail-section {
+                    background: #1e272e;
+                    padding: 25px;
+                    border-radius: 12px;
+                    border: 1px solid #2d3436;
+                }
+
+                .full-width {
+                    grid-column: 1 / -1;
+                }
+
+                h3 {
                     color: #74b9ff;
+                    margin-bottom: 15px;
+                    font-family: Quicksand, sans-serif;
                     text-transform: uppercase;
-                    letter-spacing: 0.5px;
                     font-size: 0.9rem;
+                    letter-spacing: 0.5px;
                 }
-                .detail-row p, .detail-row li {
+
+                p, li {
                     line-height: 1.6;
                     color: #dfe6e9;
                     font-size: 1rem;
                 }
-                .detail-row ul {
+
+                ul {
                     padding-left: 20px;
                     margin: 0;
                 }
-                .detail-row li {
-                    margin-bottom: 5px;
+
+                li {
+                    margin-bottom: 8px;
                 }
-                .modal-action {
-                    margin-top: 30px;
+
+                .stack-text {
+                    font-family: monospace;
+                    background: #2d3436;
+                    padding: 10px;
+                    border-radius: 6px;
+                    display: inline-block;
+                }
+
+                .action-area {
                     text-align: center;
+                    margin-top: 40px;
                 }
-                .modal-explore-btn {
+
+                .visit-btn {
                     background: #0984e3;
                     color: white;
-                    border: none;
-                    border-radius: 6px;
-                    padding: 12px 30px;
-                    cursor: pointer;
-                    font-size: 1rem;
+                    padding: 15px 40px;
+                    border-radius: 8px;
+                    text-decoration: none;
                     font-weight: 600;
-                    transition: all 0.3s;
                     text-transform: uppercase;
                     letter-spacing: 1px;
+                    transition: all 0.3s;
+                    display: inline-block;
                 }
-                .modal-explore-btn:hover {
+
+                .visit-btn:hover {
                     background: #0070f3;
                     box-shadow: 0 4px 15px rgba(9, 132, 227, 0.4);
                 }
-                @media screen and (max-width: 768px) {
-                    .modal-content {
-                        padding: 25px;
+
+                @media (max-width: 768px) {
+                    .detail-grid {
+                        grid-template-columns: 1fr;
                     }
-                    h2 {
-                        font-size: 1.5rem;
+                    
+                    h1 {
+                        font-size: 2rem;
                     }
                 }
             `}</style>
@@ -203,10 +225,10 @@ const ProjectModal = ({ project, onClose }) => {
     );
 };
 
-export default function WorkDesktop() {
+export default function Work() {
     const [texts] = useState({
-        title: "<strong>Projects</strong> & Case Studies.",
-        subtitle: "End-to-End MLOps Pipelines, System Design, and Production Engineering.",
+        title: "<strong>Projects</strong>",
+        subtitle: "Production engineering & systems.",
     });
     const [selectedProject, setSelectedProject] = useState(null);
 
@@ -451,41 +473,26 @@ export default function WorkDesktop() {
     const featuredProjects = projects.slice(0, 3);
     const otherProjects = projects.slice(3);
 
-    useEffect(() => {
-        if (selectedProject) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "unset";
-        }
-        return () => { document.body.style.overflow = "unset"; };
-    }, [selectedProject]);
+    if (selectedProject) {
+        return <ProjectDetail project={selectedProject} onBack={() => setSelectedProject(null)} />;
+    }
 
     return (
         <div className="container" id="portfolio">
-            <section id="section3">
-                <div className="content">
-                    <h2 dangerouslySetInnerHTML={{ __html: texts.title }}></h2>
-                    <p dangerouslySetInnerHTML={{ __html: texts.subtitle }}></p>
-                </div>
-            </section>
+            <SectionHeading title={texts.title} />
             
-            <div className="projects">
+            <div className="projects-grid">
                 {featuredProjects.map((project, index) => (
-                    <div className="project-tile" key={index}>
-                        <h2>{project.title}</h2>
-                        <p className="summary">{project.summary}</p>
-                        {project.image && <img src={project.image} alt={project.title} />}
-                        
-                        <div className="project-details">
-                            <div className="detail-preview">
-                                <strong>Stack:</strong>
-                                <p>{project.stack}</p>
-                            </div>
-                            
-                            <div className="box">
-                                <button className="explore-btn" onClick={() => setSelectedProject(project)}>
-                                    <span>Explore More</span>
-                                </button>
+                    <div className="project-card featured" key={index} onClick={() => setSelectedProject(project)}>
+                        <div className="card-image">
+                             {project.image ? <img src={project.image} alt={project.title} /> : <div className="placeholder" />}
+                        </div>
+                        <div className="card-content">
+                            <h3>{project.title}</h3>
+                            <p className="summary">{project.summary}</p>
+                            <div className="card-footer">
+                                <span className="stack-label">Stack</span>
+                                <span className="stack-text">{project.stack.split(',')[0]}...</span>
                             </div>
                         </div>
                     </div>
@@ -498,258 +505,174 @@ export default function WorkDesktop() {
                     {otherProjects.map((project, index) => (
                         <div className="other-project-item" key={index + 3} onClick={() => setSelectedProject(project)}>
                             <h4>{project.title}</h4>
-                            <p>{project.summary}</p>
+                            <p>{project.summary.substring(0, 60)}...</p>
                             <span className="arrow">→</span>
                         </div>
                     ))}
                 </div>
             </div>
 
-            {selectedProject && <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />}
-
             <style jsx>{`
         .container {
-          padding: 20px;
-          background: #2d3436;
+            /* minimal padding */
         }
 
-        section {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          padding: 4vw 5.103vw 2vw 10.317vw;
+        .projects-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 20px;
+          margin-bottom: 40px;
         }
 
-        section .content {
-          display: flex;
-          flex-direction: column;
-        }
-
-        section .content h2 {
-          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-          font-style: normal;
-          font-weight: 300;
-          font-size: 3.43391vw;
-          line-height: 122%;
-          color: #ffffff;
-          margin-bottom: 2.513vw;
-        }
-
-        section .content p {
-          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-          font-style: normal;
-          font-weight: 300;
-          font-size: 1.5873vw;
-          line-height: 140%;
-          color: #ffffff;
-          margin-bottom: 2.513vw;
-        }
-
-        @media screen and (max-width: 992px) {
-          section {
-            padding: 35px 22px;
-          }
-
-          section .content h2 {
-            font-size: 29px;
-            line-height: 122%;
-            width: 87%;
-            margin-bottom: 17px;
-          }
-
-          section .content p {
-            font-size: 15px;
-            line-height: 20px;
-            width: 100%;
-            margin-bottom: 32px;
-          }
-        }
-        
-        @media only screen and (max-width: 526px) {
-          section .content h2 {
-            font-size: 29px;
-          }
-        }
-
-        .projects {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 30px;
-          padding-bottom: 30px;
-        }
-
-        .project-tile {
+        .project-card {
           background: #1e272e;
-          border-radius: 12px;
-          padding: 30px;
-          width: 100%;
-          max-width: 400px;
-          text-align: left;
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-          color: #dfe6e9;
+          border-radius: 10px;
+          overflow: hidden;
+          cursor: pointer;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          border: 1px solid #2d3436;
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          border: 1px solid #2d3436;
+          height: 100%;
         }
 
-        .project-tile:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        .project-card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
           border-color: #0984e3;
         }
 
-        .project-tile h2 {
-          font-size: 1.4em;
-          margin-bottom: 10px;
-          color: #fff;
-          font-family: Quicksand, sans-serif;
-          font-weight: 700;
-          width: 100%;
-        }
-
-        .summary {
-            font-size: 0.95em;
-            color: #b2bec3;
-            margin-bottom: 15px;
-            font-style: normal;
-            line-height: 1.5;
-            width: 100%;
-            flex-grow: 1;
-        }
-
-        .project-tile img {
-          width: 100%;
-          height: auto;
-          margin-bottom: 15px;
-          border-radius: 8px;
-        }
-
-        .project-details {
-          margin-top: auto;
-          width: 100%;
-        }
-
-        .detail-preview {
-            margin-bottom: 15px;
-        }
-
-        .detail-preview strong {
-            display: block;
-            margin-bottom: 4px;
-            color: #74b9ff;
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .detail-preview p {
-            margin: 0;
-            font-size: 0.9em;
-            color: #dfe6e9;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
+        .card-image {
+            height: 150px;
             overflow: hidden;
+            background: #2d3436;
         }
 
-        .box {
-          margin-top: 15px;
-          text-align: left;
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .explore-btn {
-          background: transparent;
-          color: #0984e3;
-          border: 1px solid #0984e3;
-          border-radius: 6px;
-          padding: 8px 20px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          font-family: inherit;
-          font-weight: 600;
-          font-size: 0.9em;
-          text-transform: uppercase;
-          letter-spacing: 1px;
+        .project-card:hover .card-image img {
+            transform: scale(1.05);
         }
 
-        .explore-btn:hover {
-          background: #0984e3;
-          color: white;
-          box-shadow: 0 4px 10px rgba(9, 132, 227, 0.3);
+        .card-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Other Projects Section */
-        .other-projects-section {
-            max-width: 1200px;
-            margin: 40px auto 0;
-            padding: 0 20px 50px;
-        }
-        
-        .other-projects-section h3 {
-            color: white;
+        .card-content h3 {
+            color: #fff;
+            margin-bottom: 8px;
             font-family: Quicksand, sans-serif;
-            margin-bottom: 30px;
-            text-align: center;
-            font-size: 1.8rem;
-            font-weight: 300;
+            font-size: 1.1rem;
+            line-height: 1.3;
+            font-weight: 600;
         }
-        
+
+        .card-content .summary {
+            color: #b2bec3;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            flex: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #2d3436;
+            padding-top: 12px;
+        }
+
+        .stack-label {
+            color: #74b9ff;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .stack-text {
+            color: #dfe6e9;
+            font-size: 0.85rem;
+        }
+
+        /* Other Projects List */
+        .other-projects-section h3 {
+            color: #dfe6e9;
+            font-family: Quicksand, sans-serif;
+            margin-bottom: 20px;
+            font-weight: 300;
+            font-size: 1.5rem;
+            border-bottom: 1px solid #2d3436;
+            padding-bottom: 10px;
+        }
+
         .other-projects-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
         }
-        
+
         .other-project-item {
             background: #1e272e;
             border: 1px solid #2d3436;
-            padding: 25px;
+            padding: 15px;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: flex;
             flex-direction: column;
             position: relative;
         }
-        
+
         .other-project-item:hover {
             border-color: #0984e3;
-            transform: translateY(-3px);
             background: #252e35;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateX(3px);
         }
-        
+
         .other-project-item h4 {
             color: #74b9ff;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             font-family: Quicksand, sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
         }
-        
+
         .other-project-item p {
             color: #b2bec3;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            flex-grow: 1;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 0;
         }
-        
+
         .other-project-item .arrow {
-            align-self: flex-end;
+            position: absolute;
+            right: 15px;
+            top: 15px;
             color: #0984e3;
-            font-size: 1.2rem;
-            transition: transform 0.3s;
+            opacity: 0;
+            transition: opacity 0.2s;
         }
-        
+
         .other-project-item:hover .arrow {
-            transform: translateX(5px);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            
+        }
+      `}</style>
+      <style jsx global>{`
+        #portfolio strong {
+            font-weight: 500;
         }
       `}</style>
         </div>

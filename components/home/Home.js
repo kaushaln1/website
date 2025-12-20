@@ -1,286 +1,202 @@
 import ImagePreview from "../visual/AppPreview";
-import { useState, useEffect, useRef } from "react";
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-
-/**
- *
- * Home of the app. First page you see
- *
- * @param {String} title - Title of the component.
- * @param {String} subtitle - Subtitle of the component.
- *
- */
+import { useState } from "react";
+import { FaServer, FaCloud, FaChartLine, FaCode } from 'react-icons/fa';
+import SectionHeading from "../SectionHeading";
 
 export default function Home() {
     const [texts] = useState({
-        title: "Kaushal | MLOps & ML Engineer",
+        title: "<strong>About Me</strong>",
         subtitle:
             "I’m Kaushal — an engineer building production-grade ML systems and end-to-end MLOps pipelines that are scalable, observable, and reproducible."
     });
 
+    const aboutText = [
+        "A passionate and skilled DevOps, SRE, and Cloud Engineer with a strong background in infrastructure provisioning, automation, and monitoring. I have completed and been certified by Google Cloud for Associate Cloud Engineer and AWS for AWS Certified Cloud Practitioner.",
+        "Have experience working with tools such as Jenkins, Terraform, and Ansible to streamline development processes and ensure efficient code deployment. Proficient in maintaining high availability in Kubernetes-based container clusters.",
+        "With a Bachelor's degree in Computer Science, I am committed to continuous learning and professional growth in the MLOps and Cloud engineering landscape."
+    ];
+
+    const whatImDoing = [
+        {
+            title: "DevOps",
+            icon: <FaServer />,
+            description: "I enjoy improving the speed and quality of delivery, automate and achieve CICD."
+        },
+        {
+            title: "Cloud Engineer",
+            icon: <FaCloud />,
+            description: "I enjoy design, secure and maintenance of an organization’s cloud-based infrastructure."
+        },
+        {
+            title: "SRE",
+            icon: <FaChartLine />,
+            description: "I curious about the processes and tools that ensure the scalability and reliability of software systems."
+        },
+        {
+            title: "Software Development",
+            icon: <FaCode />,
+            description: "I enjoy learning software development either for personal or specific purposes."
+        }
+    ];
+
     return (
         <>
-            <div className="intro">
-                <div className="content">
-                    <h1>{texts.title}</h1>
-                    <p dangerouslySetInnerHTML={{__html: texts.subtitle}}
-                    ></p>
-                    <div className="social-links">
-                        <a href="https://github.com/kaushaln1" target="_blank" rel="noopener noreferrer">
-                            <FaGithub/>
-                        </a>
-                        <a href="https://www.linkedin.com/in/kaushalnerkar/" target="_blank" rel="noopener noreferrer">
-                            <FaLinkedin/>
-                        </a>
+            <div className="home-container" id="about-me">
+                <div className="top-section">
+                    <div className="text-column">
+                        <SectionHeading title={texts.title} />
+                        
+                        <div className="bio-text">
+                            {aboutText.map((paragraph, index) => (
+                                <p key={index}>{paragraph}</p>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <div className="visual-column">
+                        {/* Background watermark effect for visual */}
+                        <div className="visual-wrapper">
+                            <ImagePreview/>
+                        </div>
                     </div>
                 </div>
-                <div className="preview-container shown-preview">
-                    <div className="preview-inner">
-                        <ImagePreview/>
+
+                <div className="bottom-section">
+                    <h2>What I'm Doing</h2>
+                    <div className="doing-grid">
+                        {whatImDoing.map((item, index) => (
+                            <div className="doing-card" key={index}>
+                                <div className="icon-wrapper">
+                                    {item.icon}
+                                </div>
+                                <h3>{item.title}</h3>
+                                <p>{item.description}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
 
             <style jsx>{`
-                .intro {
-                    position: relative;
+                .home-container {
                     display: flex;
-                    background: #2d3436;
-                    padding: 12.235vw 0 10.978vw 12.103vw;
-                }
-
-                .intro .content {
-                    color: white;
-                    position: relative;
-                    z-index: 1;
-                    display: flex;
-                    justify-content: center;
                     flex-direction: column;
+                    height: 100%;
+                    gap: 30px;
+                    padding-bottom: 20px;
                 }
 
-                .intro .content h1 {
-                    opacity: 1;
-                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: clamp(5.0264vw, 5.0264vw, 154.5px);
-                    line-height: 115%;
-                    color: color(display-p3 0.549 0.929 0.996);
-                    width: clamp(32vw, 32vw, 991.92px);
-                    margin-bottom: 1.435vw;
-                    animation: fadeIn 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-                    animation-delay: 1.5s;
-                }
-
-                .intro .content p {
-                    opacity: 1;
-                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-                    font-style: normal;
-                    font-weight: 300;
-                    font-size: clamp(1.521164vw, 1.521164vw, 46.76px);
-                    line-height: 128%;
-                    width: clamp(32vw, 32vw, 890.43px);
-                    margin-bottom: 2.248vw;
-                    animation: fadeIn 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-                    animation-delay: 1.8s;
-                }
-
-                .preview-container {
-                    flex-grow: 1;
-                    z-index: 0;
-                    opacity: 0;
-                    transform: translateY(8vh);
+                .top-section {
                     display: flex;
-                    align-items: center;
+                    gap: 40px;
+                    align-items: flex-start;
+                }
+
+                .text-column {
+                    flex: 2;
+                }
+
+                .visual-column {
+                    flex: 1;
+                    display: flex;
                     justify-content: center;
-                    transition: 1s ease;
-                }
-
-                .shown-preview {
-                    opacity: 1;
-                    transform: translateY(-46vh);
+                    align-items: center;
                     position: relative;
-                    top: calc(var(--scroll-page) * -250px);
                 }
-                .social-links {
+
+                .visual-wrapper {
+                    width: 250px;
+                    height: 250px;
+                    opacity: 0.8;
+                }
+
+                .bio-text p {
+                    font-family: Quicksand, sans-serif;
+                    font-weight: 300;
+                    font-size: 1rem;
+                    line-height: 1.6;
+                    color: #dfe6e9;
+                    margin-bottom: 15px;
+                    text-align: justify;
+                }
+
+                .bottom-section h2 {
+                    font-family: Quicksand, sans-serif;
+                    font-weight: 600;
+                    font-size: 1.8rem;
+                    color: white;
+                    margin-bottom: 20px;
+                }
+
+                .doing-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 20px;
+                }
+
+                .doing-card {
+                    background: #1e272e;
+                    border: 1px solid #2d3436;
+                    border-radius: 12px;
+                    padding: 25px;
                     display: flex;
-                    gap: 1rem;
-                    margin-top: 1.5vw;
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: center;
+                    transition: transform 0.2s, border-color 0.2s;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
                 }
 
-                .social-links a {
-                    color: #fff;
+                .doing-card:hover {
+                    transform: translateY(-3px);
+                    border-color: #0984e3;
+                    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+                }
+
+                .icon-wrapper {
                     font-size: 2rem;
-                    transition: color 0.3s ease;
+                    color: #0984e3;
+                    margin-bottom: 15px;
                 }
 
-                .social-links a:hover {
-                    color: #00aaff;
+                .doing-card h3 {
+                    color: white;
+                    font-family: Quicksand, sans-serif;
+                    font-size: 1.2rem;
+                    margin-bottom: 10px;
                 }
 
-                @media screen AND (min-width: 992px) {
-                    .preview-container {
-                        transform: translateY(3vh);
-                    }
-
-                    .shown-preview {
-                        transform: translateY(0);
-                        top: calc(var(--scroll-page) * -100px);
-                    }
-
-                    .intro {
-                        overflow: hidden;
-                    }
+                .doing-card p {
+                    color: #b2bec3;
+                    font-size: 0.95rem;
+                    line-height: 1.5;
                 }
 
-                @media screen and (max-width: 992px) {
-                    .intro {
-                        padding: 23px 22px;
-                        height: 101vh !important;
-                        border-radius: 0 !important;
-                        animation: none;
-                        flex-direction: column;
+                @media (max-width: 992px) {
+                    .top-section {
+                        flex-direction: column-reverse;
+                        gap: 20px;
                     }
 
-                    .intro .content {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: stretch;
-                        margin-left: auto;
-                        margin-right: auto;
-                        padding-top: 64px;
-                        min-height: 92vh;
+                    .visual-wrapper {
+                        width: 150px;
+                        height: 150px;
                     }
-
-                    .intro .content h1 {
-                        font-size: 9vw;
-                        width: 100%;
-                        line-height: 120%;
-                        font-weight: 500;
-                        text-align: center;
-                        text-shadow: 0 0 24px #1e4b6b88;
-                        margin-bottom: 16px;
+                    
+                    .doing-grid {
+                        grid-template-columns: 1fr;
                     }
-
-                    .intro .content p {
-                        font-size: 3.5vw;
-                        line-height: 128%;
-                        width: 100%;
-                        padding: 0 15px;
-                        font-weight: 300;
-                        text-align: center;
-                    }
-                    .social-links {
-                        display: flex;
-                        gap: 1rem;
-                        margin-top: 1.5vw;
-                    }
-
-                    .social-links a {
-                        color: #fff;
-                        font-size: 2rem;
-                        transition: color 0.3s ease;
-                    }
-
-                    .social-links a:hover {
-                        color: #00aaff;
-                    }
-
-                    .preview-inner {
-                        max-width: 75%;
-                        border-radius: 10vw;
-                    }
-                }
-
-
-                @media screen AND (min-width: 1921px) {
-                    .intro .content h1 {
-                        font-size: 4vw;
-                        width: 25.807vw;
-                    }
-
-                    .intro .content p {
-                        font-size: 1.197vw;
-                        width: 23.177vw;
-                    }
-                }
-
-                @media screen AND (max-width: 526px) {
-
-                    .intro {
-                        padding-left: 4vw;
-                        padding-right: 4vw;
-                        flex-direction: column;
-                    }
-
-                    .intro .content h1 {
-                        font-size: 12vw;
-                        width: 100%;
-                        line-height: 120%;
-                        font-weight: 500;
-                        text-align: center;
-                        text-shadow: 0 0 24px #1e4b6b88;
-                        margin-bottom: 16px;
-                    }
-
-                    .intro .content p {
-                        font-size: 4vw;
-                        line-height: 128%;
-                        width: 100%;
-                        padding: 0 15px;
-                        font-weight: 300;
-                        text-align: center;
-                    }
-                    .social-links {
-                        display: flex;
-                        gap: 1rem;
-                        margin-top: 1.5vw;
-                    }
-
-                    .social-links a {
-                        color: #fff;
-                        font-size: 2rem;
-                        transition: color 0.3s ease;
-                    }
-
-                    .social-links a:hover {
-                        color: #00aaff;
+                    
+                    .bio-text p {
+                        text-align: left;
                     }
                 }
             `}</style>
             <style jsx global>{`
-        .intro .content .action span strong {
-          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-            Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-          font-style: normal;
-          font-weight: 400;
-          font-size: clamp(1.25661vw, 1.25661vw, 38.63px);
-          line-height: 128%;
-          color: #fdbab2;
-        }
-
-        @media screen and (max-width: 992px) {
-          .intro .content .action span strong {
-            font-size: 15.6443px;
-            line-height: 128%;
-          }
-        }
-
-        @media screen AND (min-width: 526px) AND (max-width: 992px) {
-          .intro .content .action span strong {
-            font-size: 20px;
-          }
-        }
-
-        @media screen AND (min-width: 1921px) {
-          .intro .content .action span strong {
-            font-size: 1vw;
-          }
-        }
-      `}</style>
+                #about-me strong {
+                    font-weight: 500;
+                }
+            `}</style>
         </>
     );
 }

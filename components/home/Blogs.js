@@ -1,155 +1,275 @@
 import { useState } from "react";
-
-/**
- *
- * Blogs component. Displays a list of blog posts.
- *
- * @param {String} title - Title of the component.
- * @param {String} subtitle - Subtitle of the component.
- *
- */
+import { FaArrowLeft, FaMedium } from "react-icons/fa";
+import SectionHeading from "../SectionHeading";
 
 export default function Blogs() {
     const [texts] = useState({
-        title: `<strong>Blogs & Case Studies,</strong> technical deep dives`,
-        subtitle: `Explore my latest technical articles, system design case studies, and certification experiences.`,
+        title: `<strong>Blogs</strong>`,
+        subtitle: `Technical articles & case studies.`,
     });
+    
+    const [selectedPost, setSelectedPost] = useState(null);
 
     const blogPosts = [
         {
             title: "Designing a Drift-Resilient ML System",
             image: "aws_medium.png", 
             link: "#",
+            summary: "A deep dive into building machine learning systems that can detect and adapt to data drift in production environments.",
         },
         {
             title: "Why ML Systems Fail in Production",
             image: "aws_medium.png",
             link: "#",
+            summary: "Analyzing common failure modes in MLOps and how to mitigate them through better monitoring and testing.",
         },
         {
             title: "Cost Tradeoffs in Real-Time ML",
             image: "aws_medium.png",
             link: "#",
+            summary: "Balancing latency, throughput, and cost when deploying real-time inference services on cloud infrastructure.",
         },
         {
-            title: "My Experience with AWS Developer Associate Certification",
+            title: "AWS Developer Associate Certification",
             image: "aws_medium.png",
             link: "https://medium.com/@kaushalv.nerkar/my-experience-with-aws-developer-associate-certification-356ba9f656db",
+            summary: "My preparation strategy, resources used, and exam day experience for passing the AWS Developer Associate exam.",
         },
         {
-            title: "My Terraform Developer Associate Certification Experience!",
+            title: "Terraform Developer Associate Certification",
             image: "aws_medium.png",
             link: "https://medium.com/aws-tip/my-terraform-developer-associate-certification-experience-35b55c2e7fb",
+            summary: "How I prepared for and passed the HashiCorp Terraform Associate certification, including key topics and practice tips.",
         },
     ];
 
-    return (
-        <>
-            <section id="blogs">
-                <div className="content">
-                    <h2 dangerouslySetInnerHTML={{ __html: texts.title }}></h2>
-                    <p dangerouslySetInnerHTML={{ __html: texts.subtitle }}></p>
-                    <div className="cards">
-                        {blogPosts.map((post, index) => (
-                            post.link !== "#" ? (
-                                <a href={post.link} target="_blank" rel="noopener noreferrer" className="card" key={index}>
-                                    <img src={post.image} alt={post.title} />
-                                    <h3>{post.title}</h3>
-                                </a>
-                            ) : (
-                                <div className="card" key={index}>
-                                    <img src={post.image} alt={post.title} />
-                                    <h3>{post.title}</h3>
-                                    <span className="coming-soon">Coming Soon</span>
-                                </div>
-                            )
-                        ))}
+    if (selectedPost) {
+        return (
+            <div className="blog-detail-view">
+                <button className="back-btn" onClick={() => setSelectedPost(null)}>
+                    <FaArrowLeft /> Back to Blogs
+                </button>
+
+                <div className="detail-content">
+                    <h1>{selectedPost.title}</h1>
+                    <div className="image-container">
+                        <img src={selectedPost.image} alt={selectedPost.title} />
                     </div>
+                    
+                    <p className="detail-summary">{selectedPost.summary}</p>
+                    
+                    {selectedPost.link && selectedPost.link !== "#" ? (
+                        <a href={selectedPost.link} target="_blank" rel="noopener noreferrer" className="read-more-btn">
+                            <FaMedium /> Read full article on Medium
+                        </a>
+                    ) : (
+                        <div className="coming-soon-banner">
+                            This article is coming soon. Stay tuned!
+                        </div>
+                    )}
                 </div>
-            </section>
+
+                <style jsx>{`
+                    .blog-detail-view {
+                        animation: fadeIn 0.3s ease-out;
+                        color: #dfe6e9;
+                        padding-bottom: 20px;
+                    }
+                    
+                    @keyframes fadeIn {
+                        from { opacity: 0; transform: translateY(10px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+
+                    .back-btn {
+                        background: transparent;
+                        border: none;
+                        color: #74b9ff;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        font-size: 0.9rem;
+                        margin-bottom: 20px;
+                        font-family: Quicksand, sans-serif;
+                        padding: 0;
+                    }
+                    
+                    .back-btn:hover {
+                        text-decoration: underline;
+                    }
+
+                    .detail-content {
+                        background: #1e272e;
+                        padding: 30px;
+                        border-radius: 12px;
+                        border: 1px solid #2d3436;
+                        max-width: 800px;
+                    }
+
+                    h1 {
+                        color: white;
+                        font-family: Quicksand, sans-serif;
+                        font-size: 2rem;
+                        margin-bottom: 20px;
+                    }
+
+                    .image-container {
+                        width: 100%;
+                        height: 250px;
+                        margin-bottom: 25px;
+                        overflow: hidden;
+                        border-radius: 8px;
+                    }
+
+                    .image-container img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    .detail-summary {
+                        font-size: 1.1rem;
+                        line-height: 1.6;
+                        color: #b2bec3;
+                        margin-bottom: 30px;
+                    }
+
+                    .read-more-btn {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 10px;
+                        background: #00ab6c; /* Medium Green */
+                        color: white;
+                        padding: 10px 25px;
+                        border-radius: 30px;
+                        text-decoration: none;
+                        font-weight: 600;
+                        font-size: 1rem;
+                        transition: transform 0.2s;
+                    }
+
+                    .read-more-btn:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 5px 15px rgba(0, 171, 108, 0.4);
+                    }
+
+                    .coming-soon-banner {
+                        background: #2d3436;
+                        color: #dfe6e9;
+                        padding: 15px;
+                        text-align: center;
+                        border-radius: 8px;
+                        font-style: italic;
+                    }
+
+                    @media (max-width: 768px) {
+                        .detail-content {
+                            padding: 20px;
+                        }
+                        h1 {
+                            font-size: 1.8rem;
+                        }
+                    }
+                `}</style>
+            </div>
+        );
+    }
+
+    return (
+        <div className="container" id="blogs">
+            <div className="content">
+                <SectionHeading title={texts.title} />
+                <div className="cards">
+                    {blogPosts.map((post, index) => (
+                        <div 
+                            className="card" 
+                            key={index} 
+                            onClick={() => setSelectedPost(post)}
+                        >
+                            <div className="card-image">
+                                <img src={post.image} alt={post.title} />
+                                {(!post.link || post.link === "#") && (
+                                    <span className="coming-soon">Coming Soon</span>
+                                )}
+                            </div>
+                            <div className="card-body">
+                                <h3>{post.title}</h3>
+                                {post.summary && <p className="card-summary">{post.summary.substring(0, 80)}...</p>}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            
             <style jsx>{`
-                section {
-                    position: relative;
-                    display: flex;
-                    flex-direction: column;
-                    padding: 4vw 5.103vw 2vw 10.317vw;
-                    background-color: #2d3436;
+                .container {
+                    /* minimal padding */
                 }
 
-                section .content h2 {
-                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-                    font-style: normal;
-                    font-weight: 300;
-                    font-size: 3.43391vw;
-                    line-height: 122%;
-                    color: #ffffff;
-                    margin-bottom: 2.513vw;
-                    animation-delay: 0s;
+                .cards {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                    gap: 20px;
                 }
 
-                section .content p {
-                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-                    font-style: normal;
-                    font-weight: 300;
-                    font-size: 1.5873vw;
-                    line-height: 140%;
-                    color: #ffffff;
-                    margin-bottom: 2.513vw;
-                    animation-delay: 0.3s;
-                }
-
-                section .cards {
-                    display: flex;
-                    flex-wrap: wrap; /* Allow wrapping */
-                    justify-content: flex-start; /* Align left */
-                    gap: 2%; /* Gap between cards */
-                    margin-top: 2vw;
-                }
-
-                section .card {
-                    background-color: #f8f9fa;
-                    border-radius: 8px;
-                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                    width: 31%; /* 3 cards per row approx */
+                .card {
+                    background-color: #1e272e;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                     cursor: pointer;
-                    transition: box-shadow 0.3s;
-                    margin-bottom: 20px;
+                    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
                     position: relative;
                     display: flex;
                     flex-direction: column;
-                    text-decoration: none; /* For anchor tags */
+                    border: 1px solid #2d3436;
+                    overflow: hidden;
                 }
 
-                section .card:hover {
-                    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                .card:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+                    border-color: #0984e3;
                 }
 
-                section .card img {
+                .card-image {
+                    height: 160px;
                     width: 100%;
-                    height: 200px; /* Fixed height for consistency */
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .card-image img {
+                    width: 100%;
+                    height: 100%;
                     object-fit: cover;
-                    border-top-left-radius: 8px;
-                    border-top-right-radius: 8px;
-                    transition: opacity 0.3s;
+                    transition: transform 0.3s;
                 }
 
-                section .card:hover img {
-                    opacity: 0.9;
+                .card:hover .card-image img {
+                    transform: scale(1.05);
                 }
 
-                section .card h3 {
-                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 1.2vw;
-                    line-height: 1.4;
-                    color: #2d3436;
+                .card-body {
                     padding: 15px;
-                    margin: 0;
-                    flex-grow: 1;
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .card h3 {
+                    font-family: Quicksand, sans-serif;
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    line-height: 1.3;
+                    color: #fff;
+                    margin-bottom: 8px;
+                }
+
+                .card-summary {
+                    font-size: 0.85rem;
+                    color: #b2bec3;
+                    line-height: 1.4;
                 }
                 
                 .coming-soon {
@@ -158,27 +278,22 @@ export default function Blogs() {
                     right: 10px;
                     background: #ff7675;
                     color: white;
-                    padding: 4px 8px;
+                    padding: 3px 8px;
                     border-radius: 4px;
-                    font-size: 0.8em;
+                    font-size: 0.7em;
                     font-weight: bold;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
                 }
 
-                @media screen and (max-width: 992px) {
-                    section .card {
-                        width: 48%; /* 2 cards per row */
-                    }
-                    section .card h3 {
-                        font-size: 16px;
-                    }
-                }
-
-                @media screen and (max-width: 600px) {
-                     section .card {
-                        width: 100%; /* 1 card per row */
-                    }
+                @media screen and (max-width: 768px) {
+                    
                 }
             `}</style>
-        </>
+            <style jsx global>{`
+                #blogs strong {
+                    font-weight: 500;
+                }
+            `}</style>
+        </div>
     );
 }

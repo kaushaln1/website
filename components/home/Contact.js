@@ -1,5 +1,6 @@
 import {useRef, useState} from "react";
 import emailjs from "emailjs-com";
+import SectionHeading from "../SectionHeading";
 
 /**
  *
@@ -15,7 +16,7 @@ const userId = process.env.NEXT_PUBLIC_USER_ID;
 export default function Contact() {
     const form = useRef();
     const [texts] = useState({
-        title: `<strong>Get in touch</strong> with me.`,
+        title: `<strong>Get in touch</strong>`,
         subtitle: `Whether you have a question or simply want to say hello, I will do my best to respond to you asap.`
     });
 
@@ -37,10 +38,10 @@ export default function Contact() {
 
     return (
         <>
-            <section id="section">
+            <section id="contact">
                 <div className="content">
-                    <h2 dangerouslySetInnerHTML={{ __html: texts.title }}></h2>
-                    <p dangerouslySetInnerHTML={{ __html: texts.subtitle }}></p>
+                    <SectionHeading title={texts.title} />
+                    <p className="subtitle" dangerouslySetInnerHTML={{ __html: texts.subtitle }}></p>
                 </div>
                 <div className="contact-form">
                     <form ref={form} onSubmit={sendEmail}>
@@ -63,42 +64,27 @@ export default function Contact() {
 
             <style jsx>{`
         section {
-          padding: 4vw 5.103vw 4vw 10.317vw;
-          background-color: #2d3436;
           display: flex;
           flex-direction: column;
-          align-items: center;
         }
 
         section .content {
           display: flex;
           flex-direction: column;
-          margin-bottom: 3vw;
+          margin-bottom: 2rem;
           width: 100%;
           text-align: left;
         }
 
-        section .content h2 {
+        .subtitle {
           font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
             Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
           font-style: normal;
           font-weight: 300;
-          font-size: 3.43391vw;
-          line-height: 122%;
-          color: #ffffff;
-          margin-bottom: 1.5vw;
-          animation-delay: 0s;
-        }
-
-        section .content p {
-          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-            Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-          font-style: normal;
-          font-weight: 300;
-          font-size: 1.5873vw;
+          font-size: 1.2rem;
           line-height: 140%;
           color: #dfe6e9;
-          margin-bottom: 2.513vw;
+          margin-bottom: 1.5rem;
         }
 
         .contact-form {
@@ -186,38 +172,14 @@ export default function Contact() {
         }
 
         @media screen and (max-width: 992px) {
-          section {
-            padding: 35px 22px;
-            margin-top: 0;
-          }
-
-          section .content {
-            width: 100%;
-          }
-
-          section .content h2 {
-            font-size: 29px;
-            line-height: 122%;
-            width: 87%;
-            margin-bottom: 17px;
-          }
-
-          section .content p {
-            font-size: 15px;
-            line-height: 20px;
-            width: 100%;
-            margin-bottom: 32px;
-          }
-          
           .contact-form {
               padding: 25px;
           }
         }
-
-        @media only screen and (max-width: 526px) {
-          section .content h2 {
-            font-size: 29px;
-          }
+      `}</style>
+      <style jsx global>{`
+        #contact strong {
+            font-weight: 500;
         }
       `}</style>
         </>
