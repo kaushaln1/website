@@ -24,7 +24,7 @@ export default function Sidebar({ activeSection, setActiveSection }) {
                            <a href="mailto:kaushalvnerkar@gmail.com" className="email-link">kaushalvnerkar@gmail.com</a>
                         </div>
                         <div className="detail-item">
-                            <FaMapMarkerAlt className="detail-icon" /> Pune, India
+                            <FaMapMarkerAlt className="detail-icon" /> USA
                         </div>
                         <div className="detail-item status">
                             <span className="status-dot"></span> Open to Work
@@ -56,10 +56,27 @@ export default function Sidebar({ activeSection, setActiveSection }) {
 
                 <div className="sidebar-footer">
                     <p>© {new Date().getFullYear()} Kaushal</p>
+                    <a href="https://uptime.kaushalnerkar.tech" target="_blank" rel="noopener noreferrer" className="uptime-link">
+                         Status: Uptime
+                    </a>
                 </div>
             </aside>
 
             <style jsx>{`
+                .uptime-link {
+                    color: #00b894;
+                    font-size: 0.8rem;
+                    text-decoration: none;
+                    display: block;
+                    margin-top: 5px;
+                    transition: color 0.3s;
+                }
+
+                .uptime-link:hover {
+                    color: #55efc4;
+                    text-decoration: underline;
+                }
+
                 .sidebar {
                     width: 320px;
                     height: 100vh;
