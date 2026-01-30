@@ -11,31 +11,26 @@ export default function Home() {
     });
 
     const aboutText = [
-        "A passionate and skilled DevOps, SRE, and Cloud Engineer with a strong background in infrastructure provisioning, automation, and monitoring. I have completed and been certified by Google Cloud for Associate Cloud Engineer and AWS for AWS Certified Cloud Practitioner.",
-        "Have experience working with tools such as Jenkins, Terraform, and Ansible to streamline development processes and ensure efficient code deployment. Proficient in maintaining high availability in Kubernetes-based container clusters.",
-        "With a Bachelor's degree in Computer Science, I am committed to continuous learning and professional growth in the MLOps and Cloud engineering landscape."
+        "I’m a Cloud, DevOps, and AI Engineer who enjoys building systems that are reliable, scalable, and easy to operate. I work across infrastructure, automation, and software to turn complex ideas into production-ready solutions.",
+        "I have experience designing CI/CD pipelines, cloud architectures, Kubernetes platforms, and AI-driven systems. I enjoy working where software meets infrastructure—making deployments faster, systems more stable, and teams more productive.",
+        "I believe in continuous learning, clean engineering, and building things that actually solve real problems."
     ];
 
     const whatImDoing = [
         {
             title: "DevOps",
             icon: <FaServer />,
-            description: "I enjoy improving the speed and quality of delivery, automate and achieve CICD."
+            description: "I build CI/CD pipelines, automate deployments, and improve delivery speed using tools like Jenkins, Docker, and Kubernetes—so teams can ship faster and safer."
         },
         {
-            title: "Cloud Engineer",
+            title: "Cloud Engineering",
             icon: <FaCloud />,
-            description: "I enjoy design, secure and maintenance of an organization’s cloud-based infrastructure."
-        },
-        {
-            title: "SRE",
-            icon: <FaChartLine />,
-            description: "I curious about the processes and tools that ensure the scalability and reliability of software systems."
+            description: "I design and maintain secure, scalable cloud infrastructure on AWS focusing on reliability, performance, and cost efficiency."
         },
         {
             title: "Software Development",
             icon: <FaCode />,
-            description: "I enjoy learning software development either for personal or specific purposes."
+            description: "I build backend services, APIs, and full-stack applications using modern frameworks, focusing on clean architecture and maintainable code."
         }
     ];
 
@@ -73,6 +68,21 @@ export default function Home() {
                                 <p>{item.description}</p>
                             </div>
                         ))}
+                    </div>
+                </div>
+
+                <div className="bottom-section">
+                    <h2>Beyond Work</h2>
+                    <div className="doing-grid">
+                        <div className="doing-card" style={{ gridColumn: '1 / -1' }}>
+                            <div className="icon-wrapper">
+                                <FaChartLine />
+                            </div>
+                            <h3>Interests & Hobbies</h3>
+                            <p>
+                                When I’m not building systems, I enjoy staying active and competitive. I’m passionate about tennis, follow Formula 1 closely, and love PC gaming—especially games like Dota and Valorant. These interests keep me sharp, strategic, and always learning—both on and off the screen.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

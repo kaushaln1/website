@@ -11,13 +11,13 @@ function ProjectsColumn() {
         projects: [
             {
                 backgroundColor: "#FFF1D5",
-                type: "MLOps Pipeline",
-                title: "<strong>End-to-End Credit Scoring Pipeline</strong>",
+                type: "MLOps Platform",
+                title: "<strong>End-to-End MLOps Platform</strong>",
                 subtitle:
-                    "Real-time credit default prediction pipeline with Airflow, MLflow, and EKS. Automated retraining and deployment.",
-                techs: "Python Airflow Docker MLflow AWS EKS",
+                    "From Zero to Production: A Kubernetes-Native MLOps System. Automated retraining and deployment.",
+                techs: "Kubernetes Feast MLflow FastAPI Prometheus",
                 links: {
-                    github: "",
+                    github: "https://github.com/kaushaln1/Financial-Risk-Prediction/tree/feature_v1_1",
                     website: "",
                 },
             },

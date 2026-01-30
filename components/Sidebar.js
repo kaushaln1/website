@@ -17,7 +17,7 @@ export default function Sidebar({ activeSection, setActiveSection }) {
                 <div className="profile-section">
                     <img src="/icon.png" alt="Profile" className="profile-img" />
                     <h2 className="profile-name">Kaushal Nerkar</h2>
-                    <p className="profile-role">MLOps & ML Engineer</p>
+                    <p className="profile-role">AI & Cloud Engineer</p>
                     
                     <div className="profile-details">
                         <div className="detail-item">

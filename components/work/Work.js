@@ -3,6 +3,8 @@ import { FaArrowLeft } from "react-icons/fa";
 import SectionHeading from "../SectionHeading";
 
 const ProjectDetail = ({ project, onBack }) => {
+    const [isImageExpanded, setIsImageExpanded] = useState(false);
+
     return (
         <div className="project-detail-view">
             <button className="back-btn" onClick={onBack}>
@@ -12,8 +14,26 @@ const ProjectDetail = ({ project, onBack }) => {
             <div className="detail-header">
                 <h1>{project.title}</h1>
                 <p className="summary">{project.summary}</p>
-                {project.image && <img src={project.image} alt={project.title} className="hero-image" />}
+                {project.image && (
+                    <div 
+                        className="hero-image-container" 
+                        onClick={() => setIsImageExpanded(true)}
+                        title="Click to zoom in"
+                    >
+                        <img src={project.image} alt={project.title} className="hero-image" />
+                        <div className="zoom-hint">🔍 Click to expand</div>
+                    </div>
+                )}
             </div>
+
+            {isImageExpanded && (
+                <div className="image-modal" onClick={() => setIsImageExpanded(false)}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <img src={project.image} alt={project.title} />
+                        <button className="close-modal" onClick={() => setIsImageExpanded(false)}>×</button>
+                    </div>
+                </div>
+            )}
 
             <div className="detail-grid">
                 <div className="detail-section">
@@ -130,12 +150,80 @@ const ProjectDetail = ({ project, onBack }) => {
                     line-height: 1.6;
                 }
 
+                .hero-image-container {
+                    position: relative;
+                    cursor: zoom-in;
+                    width: 100%;
+                    max-width: 100%;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    border: 1px solid #2d3436;
+                    background-color: white;
+                }
+
+                .hero-image-container:hover .zoom-hint {
+                    opacity: 1;
+                }
+
+                .zoom-hint {
+                    position: absolute;
+                    bottom: 10px;
+                    right: 10px;
+                    background: rgba(0, 0, 0, 0.7);
+                    color: white;
+                    padding: 5px 10px;
+                    border-radius: 20px;
+                    font-size: 0.8rem;
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                    pointer-events: none;
+                }
+
                 .hero-image {
                     width: 100%;
-                    max-height: 400px;
-                    object-fit: cover;
-                    border-radius: 12px;
-                    border: 1px solid #2d3436;
+                    max-height: 500px;
+                    object-fit: contain;
+                    display: block;
+                }
+
+                .image-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.9);
+                    z-index: 1000;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 20px;
+                    cursor: zoom-out;
+                }
+
+                .modal-content {
+                    position: relative;
+                    max-width: 95vw;
+                    max-height: 95vh;
+                    overflow: auto;
+                }
+
+                .modal-content img {
+                    max-width: 100%;
+                    max-height: 95vh;
+                    object-fit: contain;
+                    display: block;
+                }
+
+                .close-modal {
+                    position: absolute;
+                    top: -40px;
+                    right: 0;
+                    background: transparent;
+                    border: none;
+                    color: white;
+                    font-size: 2rem;
+                    cursor: pointer;
                 }
 
                 .detail-grid {
@@ -234,29 +322,29 @@ export default function Work() {
 
     const projects = [
         {
-            title: "End-to-End Credit Scoring Pipeline",
-            summary: "Real-time credit default prediction pipeline with automated retraining",
-            problem: "Need for a production-ready ML pipeline to predict credit defaults with low latency and high reliability.",
-            stack: "Python, Airflow, Docker, MLflow, AWS EKS, Terraform",
-            outcome: "Real-time scoring API with CI/CD and automated retraining loops.",
+            title: "End-to-End MLOps Platform for Financial Risk Prediction",
+            summary: "From Zero to Production: A Kubernetes-Native MLOps System",
+            problem: "Financial institutions require real-time risk assessment, but traditional ML workflows suffer from training-serving skew, manual deployments, and lack of traceability.",
+            stack: "Kubernetes, Feast, MLflow, FastAPI, Scikit-Learn, Prometheus, Terraform",
+            outcome: "A 'push-button' retraining pipeline and a robust API serving real-time risk predictions with <100ms latency.",
             highlights: [
-                "Implemented Airflow pipelines for ETL and model training coordination",
-                "Integrated MLflow for experiment tracking and model registry",
-                "Deployed containerized inference service on EKS with Horizontal Pod Autoscaling"
+                "Self-Healing: Simulated MLflow crash and verified auto-recovery capabilities via Kubernetes",
+                "End-to-End Automation: Single script orchestrates features -> training -> logging -> registering -> deploying",
+                "Local-to-Cloud Parity: Architecture deployable to AWS EKS by simply changing StorageClass and Ingress"
             ],
-            architecture: "Microservices architecture on EKS. Airflow orchestrates ETL jobs triggering SageMaker training jobs. Model artifacts stored in S3/MLflow. Inference via FastAPI pods behind ALB.",
+            architecture: "Data Ingest -> Feast Feature Store -> Redis (Online) / Parquet (Offline). Training Job -> MLflow Tracking -> Minio Artifacts. Inference via FastAPI Service querying Redis.",
             designDecisions: [
-                "Separated training and inference clusters for cost optimization.",
-                "Used Feature Store (Feast) to ensure consistency between training and serving.",
-                "Adopted GitOps (ArgoCD) for reliable deployment of model updates."
+                "Split storage into Offline (Parquet) and Online (Redis) to solve training-serving skew.",
+                "Decoupled artifact storage using Minio (S3-compatible) for model persistence independent of compute.",
+                "Strict service separation allowing independent scaling of Inference vs Training components."
             ],
             failureHandling: [
-                "Implemented circuit breakers for downstream dependencies.",
-                "Automated rollback strategies if new model version increases latency beyond SLA.",
-                "Dead letter queues for failed inference requests."
+                "K8s Deployments automatically restart crashed pods (e.g., MLflow).",
+                "Implemented retries and fallbacks in inference client for network timeouts.",
+                "Automated database migrations (Alembic) on container startup for consistency."
             ],
-            link: "#",
-            image: "aws_medium.png",
+            link: "https://github.com/kaushaln1/Financial-Risk-Prediction/tree/feature_v1_1",
+            image: "project1.png",
         },
         {
             title: "ML Model Monitoring System",

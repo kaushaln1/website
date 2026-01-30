@@ -11,7 +11,7 @@ import Blogs from "../components/home/Blogs";
 export default function Index() {
   const [activeSection, setActiveSection] = useState('home');
   const [texts] = useState({
-    title: `Kaushal | MLOps, ML Engineer`,
+    title: `Kaushal Nerkar | AI & Cloud Engineer`,
     head: `<script type="application/ld+json">
     {
       "@context": "https://schema.org",
