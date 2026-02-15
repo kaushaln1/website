@@ -10,36 +10,12 @@ function ProjectsColumn() {
     const [texts] = useState({
         projects: [
             {
-                backgroundColor: "#FFF1D5",
-                type: "MLOps Platform",
-                title: "<strong>End-to-End MLOps Platform</strong>",
-                subtitle:
-                    "From Zero to Production: A Kubernetes-Native MLOps System. Automated retraining and deployment.",
-                techs: "Kubernetes Feast MLflow FastAPI Prometheus",
-                links: {
-                    github: "https://github.com/kaushaln1/Financial-Risk-Prediction/tree/feature_v1_1",
-                    website: "",
-                },
-            },
-            {
-                backgroundColor: "#FFE2E2",
-                type: "ML Observability",
-                title: "<strong>ML Model Monitoring System</strong>",
-                subtitle:
-                    "Observability platform for detecting data drift and model degradation using Prometheus and Grafana.",
-                techs: "Prometheus Grafana EvidentlyAI FastAPI",
-                links: {
-                    github: "",
-                    website: "",
-                },
-            },
-            {
                 backgroundColor: "#D5E5FF",
-                type: "ML Infrastructure",
-                title: "<strong>Distributed Training Infrastructure</strong>",
+                type: "ML & Policy",
+                title: "<strong>Economic Inequality Early Warning System</strong>",
                 subtitle:
-                    "Scalable infrastructure for training large language models using Ray and PyTorch Lightning on AWS.",
-                techs: "PyTorch Ray AWS EC2 Docker",
+                    "Real-time Kafka streaming, ML forecasting, causal inference, and GenAI to predict and explain inequality risk for policy and impact.",
+                techs: "Kafka XGBoost DoWhy GenAI FastAPI MLflow",
                 links: {
                     github: "",
                     website: "",
@@ -58,6 +34,18 @@ function ProjectsColumn() {
                 },
             },
             {
+                backgroundColor: "#D5E5FF",
+                type: "ChatOps",
+                title: "<strong>Slack App Access Manager</strong>",
+                subtitle:
+                    "Node.js app for managing production access requests directly within Slack. Streamlined access logs and compliance.",
+                techs: "Node.js SlackAPI AWS Lambda",
+                links: {
+                    github: "https://github.com/kaushaln1/slackApp",
+                    website: "",
+                },
+            },
+            {
                 backgroundColor: "#FFE2E2",
                 type: "K8s Platform",
                 title: "<strong>KubeControl App</strong>",
@@ -70,14 +58,14 @@ function ProjectsColumn() {
                 },
             },
             {
-                backgroundColor: "#D5E5FF",
-                type: "ChatOps",
-                title: "<strong>Slack App Access Manager</strong>",
+                backgroundColor: "#FFF1D5",
+                type: "MLOps Platform",
+                title: "<strong>End-to-End MLOps Platform</strong>",
                 subtitle:
-                    "Node.js app for managing production access requests directly within Slack. Streamlined access logs and compliance.",
-                techs: "Node.js SlackAPI AWS Lambda",
+                    "From Zero to Production: A Kubernetes-Native MLOps System. Automated retraining and deployment.",
+                techs: "Kubernetes Feast MLflow FastAPI Prometheus",
                 links: {
-                    github: "https://github.com/kaushaln1/slackApp",
+                    github: "https://github.com/kaushaln1/Financial-Risk-Prediction/tree/feature_v1_1",
                     website: "",
                 },
             },
@@ -132,10 +120,13 @@ function ProjectsColumn() {
         ],
     });
 
+    const mainProjects = texts.projects.slice(0, 4);
+    const moreProjects = texts.projects.slice(4);
+
     return (
         <>
             <div className="column">
-                {texts.projects.map((item, i) => (
+                {mainProjects.map((item, i) => (
                     <div
                         className="item"
                         key={i}
@@ -165,12 +156,57 @@ function ProjectsColumn() {
                         </div>
                     </div>
                 ))}
+                {moreProjects.length > 0 && (
+                    <>
+                        <h3 className="more-heading">More Projects</h3>
+                        {moreProjects.map((item, i) => (
+                            <div
+                                className="item"
+                                key={i + 4}
+                                style={{ backgroundColor: item.backgroundColor }}
+                            >
+                                <h1
+                                    dangerouslySetInnerHTML={{ __html: item.type }}
+                                ></h1>
+                                <h2
+                                    dangerouslySetInnerHTML={{ __html: item.title }}
+                                ></h2>
+                                <p
+                                    dangerouslySetInnerHTML={{ __html: item.subtitle }}
+                                ></p>
+                                <span>{item.techs}</span>
+                                <div className="row-of-logos">
+                                    {item.links.github && (
+                                        <a href={item.links.github} target="_blank" rel="noopener noreferrer">
+                                            <img src="/logos/github-mark.png" alt="GitHub" />
+                                        </a>
+                                    )}
+                                    {item.links.website && (
+                                        <a href={item.links.website} target="_blank" rel="noopener noreferrer">
+                                            <img src="/logos/website.png" alt="Website" />
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </>
+                )}
             </div>
             <style jsx>{`
         .column {
           display: flex;
           flex-direction: column;
           margin-top: 16px;
+        }
+
+        .more-heading {
+          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+          font-size: 18px;
+          font-weight: 600;
+          color: #2d3436;
+          margin: 30px 0 15px 0;
+          padding-bottom: 8px;
+          border-bottom: 1px solid #dfe6e9;
         }
 
         h1 {

@@ -1,47 +1,42 @@
 import { useState } from "react";
+import Link from "next/link";
 import { FaArrowLeft, FaMedium } from "react-icons/fa";
 import SectionHeading from "../SectionHeading";
 
-export default function Blogs() {
+const STATIC_POSTS = [
+    {
+        type: "medium",
+        title: "AWS Developer Associate Certification",
+        image: "aws_medium.png",
+        link: "https://medium.com/@kaushalv.nerkar/my-experience-with-aws-developer-associate-certification-356ba9f656db",
+        summary: "My preparation strategy, resources used, and exam day experience for passing the AWS Developer Associate exam.",
+    },
+    {
+        type: "medium",
+        title: "Terraform Developer Associate Certification",
+        image: "aws_medium.png",
+        link: "https://medium.com/aws-tip/my-terraform-developer-associate-certification-experience-35b55c2e7fb",
+        summary: "How I prepared for and passed the HashiCorp Terraform Associate certification, including key topics and practice tips.",
+    },
+];
+
+export default function Blogs({ notionPosts = [] }) {
     const [texts] = useState({
         title: `<strong>Blogs</strong>`,
         subtitle: `Technical articles & case studies.`,
     });
-    
+
     const [selectedPost, setSelectedPost] = useState(null);
 
-    const blogPosts = [
-        {
-            title: "Designing a Drift-Resilient ML System",
-            image: "aws_medium.png", 
-            link: "#",
-            summary: "A deep dive into building machine learning systems that can detect and adapt to data drift in production environments.",
-        },
-        {
-            title: "Why ML Systems Fail in Production",
-            image: "aws_medium.png",
-            link: "#",
-            summary: "Analyzing common failure modes in MLOps and how to mitigate them through better monitoring and testing.",
-        },
-        {
-            title: "Cost Tradeoffs in Real-Time ML",
-            image: "aws_medium.png",
-            link: "#",
-            summary: "Balancing latency, throughput, and cost when deploying real-time inference services on cloud infrastructure.",
-        },
-        {
-            title: "AWS Developer Associate Certification",
-            image: "aws_medium.png",
-            link: "https://medium.com/@kaushalv.nerkar/my-experience-with-aws-developer-associate-certification-356ba9f656db",
-            summary: "My preparation strategy, resources used, and exam day experience for passing the AWS Developer Associate exam.",
-        },
-        {
-            title: "Terraform Developer Associate Certification",
-            image: "aws_medium.png",
-            link: "https://medium.com/aws-tip/my-terraform-developer-associate-certification-experience-35b55c2e7fb",
-            summary: "How I prepared for and passed the HashiCorp Terraform Associate certification, including key topics and practice tips.",
-        },
-    ];
+    const notionCards = (notionPosts || []).map((p) => ({
+        type: "notion",
+        id: p.id,
+        slug: p.slug,
+        title: p.title,
+        created: p.created,
+        image: "aws_medium.png",
+    }));
+    const allPosts = [...notionCards, ...STATIC_POSTS];
 
     if (selectedPost) {
         return (
@@ -181,24 +176,53 @@ export default function Blogs() {
             <div className="content">
                 <SectionHeading title={texts.title} />
                 <div className="cards">
-                    {blogPosts.map((post, index) => (
-                        <div 
-                            className="card" 
-                            key={index} 
-                            onClick={() => setSelectedPost(post)}
-                        >
-                            <div className="card-image">
-                                <img src={post.image} alt={post.title} />
-                                {(!post.link || post.link === "#") && (
-                                    <span className="coming-soon">Coming Soon</span>
-                                )}
+                    {allPosts.map((post, index) => {
+                        if (post.type === "notion") {
+                            return (
+                                <Link
+                                    href={`/blog/${encodeURIComponent(post.slug)}`}
+                                    key={post.id}
+                                    className="card-link"
+                                >
+                                    <div className="card">
+                                        <div className="card-image">
+                                            <img src={post.image} alt={post.title} />
+                                        </div>
+                                        <div className="card-body">
+                                            <h3>{post.title}</h3>
+                                            {post.created && (
+                                                <p className="card-date">
+                                                    {new Date(post.created).toLocaleDateString("en-US", {
+                                                        year: "numeric",
+                                                        month: "short",
+                                                        day: "numeric",
+                                                    })}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+                                </Link>
+                            );
+                        }
+                        return (
+                            <div
+                                className="card"
+                                key={`medium-${index}`}
+                                onClick={() => setSelectedPost(post)}
+                            >
+                                <div className="card-image">
+                                    <img src={post.image} alt={post.title} />
+                                    {(!post.link || post.link === "#") && (
+                                        <span className="coming-soon">Coming Soon</span>
+                                    )}
+                                </div>
+                                <div className="card-body">
+                                    <h3>{post.title}</h3>
+                                    {post.summary && <p className="card-summary">{post.summary.substring(0, 80)}...</p>}
+                                </div>
                             </div>
-                            <div className="card-body">
-                                <h3>{post.title}</h3>
-                                {post.summary && <p className="card-summary">{post.summary.substring(0, 80)}...</p>}
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
             
@@ -211,6 +235,11 @@ export default function Blogs() {
                     display: grid;
                     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
                     gap: 20px;
+                }
+
+                .card-link {
+                    text-decoration: none;
+                    color: inherit;
                 }
 
                 .card {
@@ -266,12 +295,17 @@ export default function Blogs() {
                     margin-bottom: 8px;
                 }
 
-                .card-summary {
+                .card-summary,
+                .card-date {
                     font-size: 0.85rem;
                     color: #b2bec3;
                     line-height: 1.4;
                 }
-                
+
+                .card-date {
+                    margin-top: 4px;
+                }
+
                 .coming-soon {
                     position: absolute;
                     top: 10px;

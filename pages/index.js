@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import Experience from "../components/home/Experience";
 import Contact from "../components/home/Contact";
@@ -7,9 +7,21 @@ import Head from "next/head";
 import parse from "html-react-parser";
 import Home from "../components/home/Home";
 import Blogs from "../components/home/Blogs";
+import { getBlogList } from "../lib/notion";
 
-export default function Index() {
-  const [activeSection, setActiveSection] = useState('home');
+export default function Index({ notionPosts = [] }) {
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const sync = () => {
+      if (window.location.hash === "#blogs") setActiveSection("blogs");
+    };
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
+
   const [texts] = useState({
     title: `Kaushal Nerkar | AI & Cloud Engineer`,
     head: `<script type="application/ld+json">
@@ -39,7 +51,7 @@ export default function Index() {
       case 'projects':
         return <Work />;
       case 'blogs':
-        return <Blogs />;
+        return <Blogs notionPosts={notionPosts} />;
       case 'contact':
         return <Contact />;
       default:
@@ -64,4 +76,16 @@ export default function Index() {
         </Layout>
       </>
   );
+}
+
+const REVALIDATE_BLOG_LIST = 12 * 60 * 60; // 12h
+
+export async function getStaticProps() {
+  try {
+    const notionPosts = await getBlogList();
+    return { props: { notionPosts }, revalidate: REVALIDATE_BLOG_LIST };
+  } catch (err) {
+    console.error("getStaticProps index (notion blog list):", err);
+    return { props: { notionPosts: [] }, revalidate: REVALIDATE_BLOG_LIST };
+  }
 }

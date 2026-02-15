@@ -21,7 +21,7 @@ export default function Sidebar({ activeSection, setActiveSection }) {
                     
                     <div className="profile-details">
                         <div className="detail-item">
-                           <a href="mailto:kaushalvnerkar@gmail.com" className="email-link">kaushalvnerkar@gmail.com</a>
+                           <a href="mailto:kaushalvnerkar@gmail.com" className="email-link">kaushalv.nerkar@gmail.com</a>
                         </div>
                         <div className="detail-item">
                             <FaMapMarkerAlt className="detail-icon" /> USA
@@ -80,11 +80,11 @@ export default function Sidebar({ activeSection, setActiveSection }) {
                 .sidebar {
                     width: 320px;
                     height: 100vh;
-                    background: #1e272e;
+                    background: #1a1d23;
                     display: flex;
                     flex-direction: column;
                     padding: 2rem;
-                    border-right: 1px solid #2d3436;
+                    border-right: 1px solid rgba(255,255,255,0.06);
                     position: fixed;
                     left: 0;
                     top: 0;

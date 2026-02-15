@@ -22,13 +22,13 @@ export default function Layout({ activeSection, setActiveSection, children }) {
                 .app-container {
                     display: flex;
                     min-height: 100vh;
-                    background-color: #2d3436;
+                    background-color: #1a1d23;
                 }
 
                 .main-content {
                     flex: 1;
                     margin-left: 320px; /* Width of sidebar */
-                    background-color: #2d3436;
+                    background-color: #1a1d23;
                     min-height: 100vh;
                     position: relative;
                 }

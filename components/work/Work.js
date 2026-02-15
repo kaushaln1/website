@@ -322,6 +322,101 @@ export default function Work() {
 
     const projects = [
         {
+            title: "Economic Inequality Early Warning System",
+            summary: "Real-time ML system to forecast and explain inequality risk for policy and impact use",
+            problem: "Policymakers and institutions lack actionable, real-time signals that predict where inequality is likely to worsen; traditional approaches rely on lagging indicators published years later.",
+            stack: "Kafka, Python, XGBoost/LightGBM, Prophet, DoWhy/EconML, GenAI (OpenAI/Anthropic), FastAPI, MLflow, AWS/S3",
+            outcome: "End-to-end pipeline from streaming economic data to inequality risk scores, causal driver attribution, and GenAI-generated policy narratives—enabling proactive intervention.",
+            highlights: [
+                "Designed Kafka topics and streaming pipeline for labor, demographics, and macro data (BLS, FRED, Census)",
+                "Built ML forecasting (risk score + time-series) and causal inference (DoWhy/EconML) for driver attribution",
+                "Integrated GenAI for policy briefs and plain-language explanations from forecasts and causal outputs",
+                "Deployed FastAPI serving and MLOps (MLflow, retraining, drift monitoring) for production use"
+            ],
+            architecture: "Kafka raw topics → Kafka Streams feature pipeline → Offline feature store (S3/Parquet). Training: risk model + forecaster + causal module; MLflow registry. Serving: FastAPI (risk, forecasts, drivers) + GenAI narrative layer. Outputs to inequality.forecasts and inequality.alerts.",
+            designDecisions: [
+                "Stream and batch feature parity with versioned feature sets to avoid training-serving skew.",
+                "Causal inference (Double ML / causal forests) for policy-relevant driver attribution, not just correlation.",
+                "GenAI prompts constrained to cited numbers and structured input to reduce hallucination in policy text."
+            ],
+            failureHandling: [
+                "Schema evolution via Schema Registry; backward-compatible additions only in production.",
+                "Fallback to last-known-good model and cached forecasts if training or API fails.",
+                "Data drift and model performance monitoring with alerts; retraining pipeline on schedule or on drift."
+            ],
+            link: "#",
+            image: "eiews_architecture.png",
+        },
+        {
+            title: "Terraform Code Generator with AI & RAG",
+            summary: "AI-powered tool to automate Infrastructure-as-Code creation",
+            problem: "Manual creation of Terraform modules was repetitive and error-prone.",
+            stack: "Python, LangChain, OpenAI API, ChromaDB, Streamlit",
+            outcome: "Accelerated infrastructure provisioning by 40% for standard patterns.",
+            highlights: [
+                "Built RAG pipeline to retrieve relevant Terraform docs and examples",
+                "Developed interactive UI for intent-based code generation",
+                "Integrated validation steps to ensure generated code syntax correctness"
+            ],
+            architecture: "RAG pipeline with Vector DB (Chroma). User intent classifier -> Retrieval -> LLM Generation -> Syntax Validator.",
+            designDecisions: [
+                "Used a specialized vector store for efficient similarity search of Terraform docs.",
+                "Implemented a feedback loop where user corrections improve the prompt context."
+            ],
+            failureHandling: [
+                "Fallback to standard templates if retrieval confidence is low.",
+                "Retry logic for LLM API timeouts."
+            ],
+            link: null,
+            image: "terraform_architecture.png",
+        },
+        {
+            title: "Slack App for Access Management",
+            summary: "ChatOps integration for requesting production access (PAR)",
+            problem: "Manual requests for production access were slow, hard to track, and lacked auditability.",
+            stack: "Node.js, Slack API, AWS Lambda, DynamoDB",
+            outcome: "Streamlined access requests directly within Slack, improving compliance.",
+            highlights: [
+                "Implemented interactive slash commands for access requests",
+                "Automated retrieval of access logs from granting server",
+                "Reduced support ticket volume for access issues"
+            ],
+            architecture: "Slack Webhook -> API Gateway -> Lambda -> DynamoDB (Audit Log) & IAM Policy Update.",
+            designDecisions: [
+                "Serverless architecture (Lambda) for cost-efficiency given the bursty traffic pattern.",
+                "DynamoDB for immutable audit trail of all access grants."
+            ],
+            failureHandling: [
+                "Slack notification to admin channel if Lambda execution fails.",
+                "Idempotency checks to prevent duplicate access grants."
+            ],
+            link: "https://github.com/kaushaln1/slackApp",
+            image: "slackapp_architecture.png"
+        },
+        {
+            title: "KubeControl App",
+            summary: "Containerized application deployment platform on EKS",
+            problem: "Managing Kubernetes deployments required complex CLI commands and high cognitive load.",
+            stack: "React.js, Flask, Kubernetes API, AWS EKS, Docker",
+            outcome: "Simplified deployment process and reduced onboarding time for developers.",
+            highlights: [
+                "Created a user-friendly UI for managing deployed apps",
+                "Reduced deployment time significantly via automation",
+                "Secured integration with AWS EKS using role-based access"
+            ],
+            architecture: "React Frontend -> Flask Backend -> Kubernetes API Server. IAM Authenticator for EKS access.",
+            designDecisions: [
+                "Direct integration with K8s API rather than wrapping Helm for finer-grained control.",
+                "Role-Based Access Control (RBAC) mapping to IAM roles for security."
+            ],
+            failureHandling: [
+                "Detailed error logs exposed to UI for deployment failures.",
+                "Automatic retry for transient API server errors."
+            ],
+            link: "https://github.com/kaushaln1/KubeControl/tree/master",
+            image: "kubecontrol_architecture.png",
+        },
+        {
             title: "End-to-End MLOps Platform for Financial Risk Prediction",
             summary: "From Zero to Production: A Kubernetes-Native MLOps System",
             problem: "Financial institutions require real-time risk assessment, but traditional ML workflows suffer from training-serving skew, manual deployments, and lack of traceability.",
@@ -345,124 +440,6 @@ export default function Work() {
             ],
             link: "https://github.com/kaushaln1/Financial-Risk-Prediction/tree/feature_v1_1",
             image: "project1.png",
-        },
-        {
-            title: "ML Model Monitoring System",
-            summary: "Observability platform for detecting data drift and model degradation",
-            problem: "Lack of visibility into model performance in production led to silent failures.",
-            stack: "Prometheus, Grafana, Evidently AI, FastAPI, Kubernetes",
-            outcome: "Reduced time-to-detection of model drift from weeks to hours.",
-            highlights: [
-                "Set up real-time dashboarding for distribution drift and performance metrics",
-                "Automated alerting system for concept drift detection",
-                "Integrated with slack for immediate team notification"
-            ],
-            architecture: "Sidecar pattern for metric collection. Request/Response payloads logged to Kafka, processed by Evidently AI workers, metrics pushed to Prometheus.",
-            designDecisions: [
-                "Decoupled monitoring from the inference path to avoid latency impact.",
-                "Used Prometheus for time-series storage due to its native K8s integration.",
-                "Implemented alert routing via Alertmanager to Slack/PagerDuty."
-            ],
-            failureHandling: [
-                "Graceful degradation if monitoring service is down (inference continues).",
-                "Buffer mechanisms for high-throughput metric ingestion."
-            ],
-            link: "#",
-            image: "aws_medium.png",
-        },
-        {
-            title: "Distributed Training Infrastructure",
-            summary: "Scalable infrastructure for training large language models",
-            problem: "Training large models on single instances was slow and memory-constrained.",
-            stack: "PyTorch Lightning, Ray, AWS EC2, S3, Docker",
-            outcome: "Reduced training time by 60% through distributed data parallelism.",
-            highlights: [
-                "Architected multi-node training cluster using Ray",
-                "Optimized data loading pipeline from S3 to GPU instances",
-                "Implemented checkpointing and fault-tolerance mechanisms"
-            ],
-            architecture: "Ray cluster on EC2 Spot instances. S3 as the central data lake. FSx for high-performance checkpoint storage.",
-            designDecisions: [
-                "Utilized Spot instances with aggressive checkpointing to reduce costs by 70%.",
-                "Selected Ray for its superior actor-based handling of dynamic worker scaling.",
-                "Optimized Dataloaders with pre-fetching and caching strategies."
-            ],
-            failureHandling: [
-                "Automatic worker replacement for Spot interruptions.",
-                "Frequent checkpointing to S3 to minimize lost computation time.",
-                "Heartbeat monitoring for stuck workers."
-            ],
-            link: "#",
-            image: "aws_medium.png",
-        },
-        {
-            title: "Terraform Code Generator with AI & RAG",
-            summary: "AI-powered tool to automate Infrastructure-as-Code creation",
-            problem: "Manual creation of Terraform modules was repetitive and error-prone.",
-            stack: "Python, LangChain, OpenAI API, ChromaDB, Streamlit",
-            outcome: "Accelerated infrastructure provisioning by 40% for standard patterns.",
-            highlights: [
-                "Built RAG pipeline to retrieve relevant Terraform docs and examples",
-                "Developed interactive UI for intent-based code generation",
-                "Integrated validation steps to ensure generated code syntax correctness"
-            ],
-            architecture: "RAG pipeline with Vector DB (Chroma). User intent classifier -> Retrieval -> LLM Generation -> Syntax Validator.",
-            designDecisions: [
-                "Used a specialized vector store for efficient similarity search of Terraform docs.",
-                "Implemented a feedback loop where user corrections improve the prompt context."
-            ],
-            failureHandling: [
-                "Fallback to standard templates if retrieval confidence is low.",
-                "Retry logic for LLM API timeouts."
-            ],
-            link: null,
-            image: "aws_medium.png",
-        },
-        {
-            title: "KubeControl App",
-            summary: "Containerized application deployment platform on EKS",
-            problem: "Managing Kubernetes deployments required complex CLI commands and high cognitive load.",
-            stack: "React.js, Flask, Kubernetes API, AWS EKS, Docker",
-            outcome: "Simplified deployment process and reduced onboarding time for developers.",
-            highlights: [
-                "Created a user-friendly UI for managing deployed apps",
-                "Reduced deployment time significantly via automation",
-                "Secured integration with AWS EKS using role-based access"
-            ],
-            architecture: "React Frontend -> Flask Backend -> Kubernetes API Server. IAM Authenticator for EKS access.",
-            designDecisions: [
-                "Direct integration with K8s API rather than wrapping Helm for finer-grained control.",
-                "Role-Based Access Control (RBAC) mapping to IAM roles for security."
-            ],
-            failureHandling: [
-                "Detailed error logs exposed to UI for deployment failures.",
-                "Automatic retry for transient API server errors."
-            ],
-            link: "https://github.com/kaushaln1/KubeControl/tree/master",
-            image: "aws_medium.png",
-        },
-        {
-            title: "Slack App for Access Management",
-            summary: "ChatOps integration for requesting production access (PAR)",
-            problem: "Manual requests for production access were slow, hard to track, and lacked auditability.",
-            stack: "Node.js, Slack API, AWS Lambda, DynamoDB",
-            outcome: "Streamlined access requests directly within Slack, improving compliance.",
-            highlights: [
-                "Implemented interactive slash commands for access requests",
-                "Automated retrieval of access logs from granting server",
-                "Reduced support ticket volume for access issues"
-            ],
-            architecture: "Slack Webhook -> API Gateway -> Lambda -> DynamoDB (Audit Log) & IAM Policy Update.",
-            designDecisions: [
-                "Serverless architecture (Lambda) for cost-efficiency given the bursty traffic pattern.",
-                "DynamoDB for immutable audit trail of all access grants."
-            ],
-            failureHandling: [
-                "Slack notification to admin channel if Lambda execution fails.",
-                "Idempotency checks to prevent duplicate access grants."
-            ],
-            link: "https://github.com/kaushaln1/slackApp",
-            image: "aws_medium.png"
         },
         {
             title: "End to End CI/CD Pipeline",
@@ -558,8 +535,8 @@ export default function Work() {
         },
     ];
 
-    const featuredProjects = projects.slice(0, 3);
-    const otherProjects = projects.slice(3);
+    const featuredProjects = projects.slice(0, 4);
+    const otherProjects = projects.slice(4);
 
     if (selectedProject) {
         return <ProjectDetail project={selectedProject} onBack={() => setSelectedProject(null)} />;
@@ -591,7 +568,7 @@ export default function Work() {
                 <h3>More Projects</h3>
                 <div className="other-projects-list">
                     {otherProjects.map((project, index) => (
-                        <div className="other-project-item" key={index + 3} onClick={() => setSelectedProject(project)}>
+                        <div className="other-project-item" key={index + 4} onClick={() => setSelectedProject(project)}>
                             <h4>{project.title}</h4>
                             <p>{project.summary.substring(0, 60)}...</p>
                             <span className="arrow">→</span>
