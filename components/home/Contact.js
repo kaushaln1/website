@@ -1,5 +1,6 @@
 import {useRef, useState} from "react";
 import emailjs from "emailjs-com";
+import SectionHeading from "../SectionHeading";
 
 /**
  *
@@ -15,7 +16,7 @@ const userId = process.env.NEXT_PUBLIC_USER_ID;
 export default function Contact() {
     const form = useRef();
     const [texts] = useState({
-        title: `<strong>Get in touch</strong> with me.`,
+        title: `<strong>Get in touch</strong>`,
         subtitle: `Whether you have a question or simply want to say hello, I will do my best to respond to you asap.`
     });
 
@@ -37,141 +38,151 @@ export default function Contact() {
 
     return (
         <>
-            <section id="section">
+            <section id="contact">
                 <div className="content">
-                    <h2 dangerouslySetInnerHTML={{ __html: texts.title }}></h2>
-                    <p dangerouslySetInnerHTML={{ __html: texts.subtitle }}></p>
+                    <SectionHeading title={texts.title} />
+                    <p className="subtitle" dangerouslySetInnerHTML={{ __html: texts.subtitle }}></p>
                 </div>
                 <div className="contact-form">
                     <form ref={form} onSubmit={sendEmail}>
-                        <input type="text" name="from_name" placeholder="Full name" required />
-                        <input type="email" name="reply_to" placeholder="Email address" required />
-                        <textarea name="message" placeholder="Your message" required></textarea>
-                        <button type="submit">Submit</button>
+                        <div className="form-group">
+                            <label>Name</label>
+                            <input type="text" name="from_name" placeholder="Enter your name" required />
+                        </div>
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input type="email" name="reply_to" placeholder="Enter your email address" required />
+                        </div>
+                        <div className="form-group">
+                            <label>Message</label>
+                            <textarea name="message" placeholder="Write your message here..." required></textarea>
+                        </div>
+                        <button type="submit">Send Message</button>
                     </form>
                 </div>
             </section>
 
             <style jsx>{`
         section {
-          padding: 4vw 5.103vw 2vw 10.317vw;
+          display: flex;
+          flex-direction: column;
         }
 
         section .content {
           display: flex;
           flex-direction: column;
-          margin-bottom: 2vw;
+          margin-bottom: 2rem;
+          width: 100%;
+          text-align: left;
         }
 
-        section .content h2 {
+        .subtitle {
           font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
             Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
           font-style: normal;
           font-weight: 300;
-          font-size: 3.43391vw;
-          line-height: 122%;
-          color: #2d3436;
-          margin-bottom: 2.513vw;
-          animation-delay: 0s;
-        }
-
-        section .content p {
-          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-            Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-          font-style: normal;
-          font-weight: 300;
-          font-size: 1.5873vw;
+          font-size: 1.2rem;
           line-height: 140%;
-          color: #2d3436;
-          margin-bottom: 2.513vw;
+          color: #dfe6e9;
+          margin-bottom: 1.5rem;
         }
 
         .contact-form {
           display: flex;
           flex-direction: column;
           align-items: center;
-          background-color: #1c1e24;
+          background-color: #1e272e;
           padding: 40px;
-          border-radius: 8px;
+          border-radius: 12px;
           width: 100%;
-          max-width: 600px;
-          margin: auto;
+          max-width: 700px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          border: 1px solid #2d3436;
         }
 
         .contact-form form {
           width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: #dfe6e9;
+            font-family: Quicksand, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .contact-form input,
         .contact-form textarea {
           width: 100%;
           padding: 15px;
-          margin-bottom: 15px;
-          border: none;
-          border-radius: 5px;
-          background-color: #333;
+          border: 1px solid #2d3436;
+          border-radius: 8px;
+          background-color: #2d3436;
           color: #fff;
           font-size: 16px;
           outline: none;
+          font-family: Quicksand, sans-serif;
+          transition: border-color 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #0984e3;
         }
 
         .contact-form input::placeholder,
         .contact-form textarea::placeholder {
-          color: #888;
+          color: #636e72;
         }
 
         .contact-form textarea {
           height: 150px;
-          resize: none;
+          resize: vertical;
         }
 
         .contact-form button {
           width: 100%;
           padding: 15px;
           border: none;
-          border-radius: 5px;
-          background-color: #007bff;
+          border-radius: 8px;
+          background-color: #0984e3;
           color: #fff;
           font-size: 16px;
+          font-weight: 600;
           cursor: pointer;
-          transition: background-color 0.3s ease;
+          transition: all 0.3s ease;
+          font-family: Quicksand, sans-serif;
+          margin-top: 10px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
         }
 
         .contact-form button:hover {
-          background-color: #0056b3;
+          background-color: #0070f3;
+          box-shadow: 0 4px 15px rgba(9, 132, 227, 0.4);
         }
 
         @media screen and (max-width: 992px) {
-          section {
-            padding: 35px 22px;
-            margin-top: 2vh;
-          }
-
-          section .content {
-            width: 100%;
-          }
-
-          section .content h2 {
-            font-size: 29px;
-            line-height: 122%;
-            width: 87%;
-            margin-bottom: 17px;
-          }
-
-          section .content p {
-            font-size: 15px;
-            line-height: 20px;
-            width: 100%;
-            margin-bottom: 32px;
+          .contact-form {
+              padding: 25px;
           }
         }
-
-        @media only screen and (max-width: 526px) {
-          section .content h2 {
-            font-size: 29px;
-          }
+      `}</style>
+      <style jsx global>{`
+        #contact strong {
+            font-weight: 500;
         }
       `}</style>
         </>
     );
+
 }

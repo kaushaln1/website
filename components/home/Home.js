@@ -1,291 +1,367 @@
-import ImagePreview from "../visual/AppPreview";
-import { useState, useEffect, useRef } from "react";
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-
-/**
- *
- * Home of the app. First page you see
- *
- * @param {String} title - Title of the component.
- * @param {String} subtitle - Subtitle of the component.
- *
- */
+import { useState } from "react";
+import Head from "next/head";
 
 export default function Home() {
-    const [texts] = useState({
-        title: "Kaushal Vinay Nerkar",
-        subtitle:
-            "Welcome to my portfolio! I'm Kaushal Nerkar, a software developer with expertise in Java SpringBoot, Kubernetes, and AWS. <br\>" +
-            "I've developed scalable and efficient solutions, optimizing performance and deployment processes."
-        // "<br/>Passionate about innovative tech solutions. " +
-        // "<br\>Explore my work to see my journey and contributions." +
-        //
-        // "<br/><br/> Jack of all trades, master of none, but often times better than a master of one.",
-    });
+    const whatImDoing = [
+        {
+            title: "DevOps Engineering",
+            icon: "⚙️",
+            description: "I design CI/CD pipelines that ship software faster and safer — using Jenkins, Docker, and Kubernetes to automate deployments that previously took days down to minutes. At HSBC, this cut release cycles by 75%.",
+        },
+        {
+            title: "Cloud Architecture",
+            icon: "☁️",
+            description: "I build and migrate cloud infrastructure on AWS — from Aurora DB connectivity patterns to full platform migrations from PCF to AWS. My focus is security, cost efficiency, and long-term scalability.",
+        },
+        {
+            title: "AI Engineering",
+            icon: "🤖",
+            description: "I develop production AI systems — from RAG pipelines and LLM-powered financial assistants to real-time voice chatbots using LangGraph and LangChain. I build AI that integrates cleanly with existing infrastructure.",
+        },
+        {
+            title: "Backend Development",
+            icon: "</>",
+            description: "I write robust backend services and APIs in Java Spring Boot, FastAPI, and Node.js — with an emphasis on clean architecture, testability, and microservices that are easy for teams to maintain and extend.",
+        },
+    ];
+
+    const tags = ["🎾 Tennis", "🏎 Formula 1", "🎮 Dota 2", "🎯 Valorant", "📐 Systems Thinking"];
 
     return (
         <>
-            <div className="intro">
-                <div className="content">
-                    <h1>{texts.title}</h1>
-                    <p dangerouslySetInnerHTML={{__html: texts.subtitle}}
-                    ></p>
-                    <div className="social-links">
-                        <a href="https://github.com/kaushaln1" target="_blank" rel="noopener noreferrer">
-                            <FaGithub/>
-                        </a>
-                        <a href="https://www.linkedin.com/in/kaushalnerkar/" target="_blank" rel="noopener noreferrer">
-                            <FaLinkedin/>
-                        </a>
+            <Head>
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+                    rel="stylesheet"
+                />
+            </Head>
+            <div className="home-container" id="about-me">
+                {/* About header */}
+                <section className="about-header">
+                    <div className="about-text">
+                        <h1>About Me</h1>
+                        <div className="accent-line" />
+                        <p>
+                            I'm a <strong>Cloud, DevOps, and AI Engineer</strong> with 4 years of industry experience building systems that are fast, resilient, and genuinely useful. My work spans infrastructure automation, microservices architecture, and AI-driven applications — turning complex engineering problems into clean, production-ready solutions.
+                        </p>
+                        <p>
+                            At HSBC, I cut deployment time by <strong>75%</strong> through CI/CD automation and led a cloud migration that saved <strong>$1.3M</strong> in infrastructure costs. Today, at Linvest21, I'm building AI systems — including real-time voice chatbots and LLM-powered investment intelligence platforms — that make financial data more accessible and actionable.
+                        </p>
+                        <p>
+                            I hold a <strong>Master's in Computer Science</strong> from Binghamton University and am certified in both AWS and Terraform. I believe the best engineering is invisible — systems that just work, at scale, without drama.
+                        </p>
+                        <div className="certs-strip">
+                            <span className="cert-badge">☁ AWS Certified Developer</span>
+                            <span className="cert-badge">⬡ HashiCorp Terraform Associate</span>
+                            <span className="cert-badge">🎓 M.S. Computer Science – SUNY Binghamton</span>
+                        </div>
+                    </div>
+                    <div className="avatar-wrap">
+                        <img src="/homeImage.png" alt="Kaushal Nerkar" />
+                    </div>
+                </section>
+
+                {/* Quick stats */}
+                <div className="stats-row">
+                    <div className="stat">
+                        <span className="stat-value">4+</span>
+                        <span className="stat-label">Years Experience</span>
+                    </div>
+                    <div className="stat-divider" />
+                    <div className="stat">
+                        <span className="stat-value">75%</span>
+                        <span className="stat-label">Deployment Time Reduced</span>
+                    </div>
+                    <div className="stat-divider" />
+                    <div className="stat">
+                        <span className="stat-value">$1.3M</span>
+                        <span className="stat-label">Infrastructure Savings</span>
+                    </div>
+                    <div className="stat-divider" />
+                    <div className="stat">
+                        <span className="stat-value">2</span>
+                        <span className="stat-label">Cloud Certifications</span>
                     </div>
                 </div>
-                <div className="preview-container shown-preview">
-                    <div className="preview-inner">
-                        <ImagePreview/>
+
+                {/* What I'm Doing */}
+                <section>
+                    <h2 className="section-heading">What I'm Doing</h2>
+                    <div className="cards-grid">
+                        {whatImDoing.map((item, index) => (
+                            <div className="card" key={index}>
+                                <span className="card-icon">{item.icon}</span>
+                                <div className="card-title">{item.title}</div>
+                                <p className="card-desc">{item.description}</p>
+                            </div>
+                        ))}
                     </div>
-                </div>
+                </section>
+
+                {/* Beyond Work */}
+                <section className="beyond-section">
+                    <h2 className="section-heading">Beyond Work</h2>
+                    <div className="beyond-card">
+                        <span className="card-icon">🎯</span>
+                        <div className="card-title">Interests & Hobbies</div>
+                        <p className="card-desc beyond-desc">
+                            Off the keyboard, I'm competitive in everything I do. I play tennis regularly, follow Formula 1 with the intensity of a strategist (the pit stops matter), and log serious hours in Dota 2 and Valorant — games that reward the same systems thinking I bring to engineering. Sport and strategy keep me sharp.
+                        </p>
+                        <div className="tags">
+                            {tags.map((tag, i) => (
+                                <span className="tag" key={i}>{tag}</span>
+                            ))}
+                        </div>
+                    </div>
+                </section>
             </div>
 
             <style jsx>{`
-                .intro {
-                    position: relative;
-                    display: flex;
-                    background: #2d3436;
-                    padding: 12.235vw 0 10.978vw 12.103vw;
+                .home-container {
+                    --bg-base: #1e2025;
+                    --bg-card: #252830;
+                    --bg-card-hover: #2c3040;
+                    --accent: #4f9eff;
+                    --accent-dim: rgba(79, 158, 255, 0.12);
+                    --text-primary: #e8eaf0;
+                    --text-secondary: #9aa3b8;
+                    --text-muted: #5c6478;
+                    --border: rgba(79, 158, 255, 0.15);
+                    --border-subtle: rgba(255, 255, 255, 0.06);
+
+                    font-family: "Sora", sans-serif;
+                    color: var(--text-primary);
+                    padding-bottom: 52px;
                 }
 
-                .intro .content {
-                    color: white;
-                    position: relative;
-                    z-index: 1;
-                    display: flex;
-                    justify-content: center;
-                    flex-direction: column;
+                .about-header {
+                    display: grid;
+                    grid-template-columns: 1fr auto;
+                    gap: 32px;
+                    align-items: start;
+                    margin-bottom: 52px;
                 }
 
-                .intro .content h1 {
-                    opacity: 1;
-                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: clamp(5.0264vw, 5.0264vw, 154.5px);
-                    line-height: 115%;
-                    color: color(display-p3 0.549 0.929 0.996);
-                    width: clamp(32vw, 32vw, 991.92px);
-                    margin-bottom: 1.435vw;
-                    animation: fadeIn 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-                    animation-delay: 1.5s;
+                .about-text h1 {
+                    font-size: 2.1rem;
+                    font-weight: 700;
+                    letter-spacing: -0.02em;
+                    margin-bottom: 10px;
+                    color: var(--text-primary);
                 }
 
-                .intro .content p {
-                    opacity: 1;
-                    font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-                    font-style: normal;
+                .accent-line {
+                    width: 40px;
+                    height: 3px;
+                    background: var(--accent);
+                    border-radius: 2px;
+                    margin-bottom: 28px;
+                }
+
+                .about-text p {
+                    font-size: 1.02rem;
+                    color: var(--text-secondary);
+                    margin-bottom: 18px;
                     font-weight: 300;
-                    font-size: clamp(1.521164vw, 1.521164vw, 46.76px);
-                    line-height: 128%;
-                    width: clamp(32vw, 32vw, 890.43px);
-                    margin-bottom: 2.248vw;
-                    animation: fadeIn 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-                    animation-delay: 1.8s;
+                    line-height: 1.75;
                 }
 
-                .preview-container {
-                    flex-grow: 1;
-                    z-index: 0;
-                    opacity: 0;
-                    transform: translateY(8vh);
+                .about-text p strong {
+                    color: var(--text-primary);
+                    font-weight: 500;
+                }
+
+                .avatar-wrap {
+                    width: 140px;
+                    height: 140px;
+                    min-width: 140px;
+                    min-height: 140px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    border: 2px solid var(--border);
+                    flex-shrink: 0;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    transition: 1s ease;
                 }
 
-                .shown-preview {
-                    opacity: 1;
-                    transform: translateY(-46vh);
-                    position: relative;
-                    top: calc(var(--scroll-page) * -250px);
+                .avatar-wrap img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center 15%;
+                    // gap: 30px;
+                    // padding-bottom: 2px;
                 }
-                .social-links {
+
+                .certs-strip {
                     display: flex;
-                    gap: 1rem;
-                    margin-top: 1.5vw;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                    margin-top: 24px;
                 }
 
-                .social-links a {
-                    color: #fff;
-                    font-size: 2rem;
-                    transition: color 0.3s ease;
+                .cert-badge {
+                    background: var(--accent-dim);
+                    border: 1px solid rgba(79, 158, 255, 0.25);
+                    border-radius: 8px;
+                    padding: 6px 14px;
+                    font-size: 0.75rem;
+                    color: var(--accent);
+                    font-family: "JetBrains Mono", monospace;
                 }
 
-                .social-links a:hover {
-                    color: #00aaff;
+                .stats-row {
+                    display: flex;
+                    gap: 32px;
+                    margin-bottom: 52px;
+                    padding: 24px 28px;
+                    background: var(--bg-card);
+                    border: 1px solid var(--border-subtle);
+                    border-radius: 12px;
                 }
 
-                @media screen AND (min-width: 992px) {
-                    .preview-container {
-                        transform: translateY(3vh);
-                    }
-
-                    .shown-preview {
-                        transform: translateY(0);
-                        top: calc(var(--scroll-page) * -100px);
-                    }
-
-                    .intro {
-                        overflow: hidden;
-                    }
+                .stat {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
                 }
 
-                @media screen and (max-width: 992px) {
-                    .intro {
-                        padding: 23px 22px;
-                        height: 101vh !important;
-                        border-radius: 0 !important;
-                        animation: none;
-                        flex-direction: column;
-                    }
-
-                    .intro .content {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: stretch;
-                        margin-left: auto;
-                        margin-right: auto;
-                        padding-top: 64px;
-                        min-height: 92vh;
-                    }
-
-                    .intro .content h1 {
-                        font-size: 9vw;
-                        width: 100%;
-                        line-height: 120%;
-                        font-weight: 500;
-                        text-align: center;
-                        text-shadow: 0 0 24px #1e4b6b88;
-                        margin-bottom: 16px;
-                    }
-
-                    .intro .content p {
-                        font-size: 3.5vw;
-                        line-height: 128%;
-                        width: 100%;
-                        padding: 0 15px;
-                        font-weight: 300;
-                        text-align: center;
-                    }
-                    .social-links {
-                        display: flex;
-                        gap: 1rem;
-                        margin-top: 1.5vw;
-                    }
-
-                    .social-links a {
-                        color: #fff;
-                        font-size: 2rem;
-                        transition: color 0.3s ease;
-                    }
-
-                    .social-links a:hover {
-                        color: #00aaff;
-                    }
-
-                    .preview-inner {
-                        max-width: 75%;
-                        border-radius: 10vw;
-                    }
+                .stat-value {
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    color: var(--accent);
+                    font-family: "JetBrains Mono", monospace;
+                    letter-spacing: -0.02em;
                 }
 
-
-                @media screen AND (min-width: 1921px) {
-                    .intro .content h1 {
-                        font-size: 4vw;
-                        width: 25.807vw;
-                    }
-
-                    .intro .content p {
-                        font-size: 1.197vw;
-                        width: 23.177vw;
-                    }
+                .stat-label {
+                    font-size: 0.75rem;
+                    color: var(--text-muted);
+                    text-transform: uppercase;
+                    letter-spacing: 0.08em;
+                    font-weight: 500;
                 }
 
-                @media screen AND (max-width: 526px) {
+                .stat-divider {
+                    width: 1px;
+                    background: var(--border-subtle);
+                    align-self: stretch;
+                }
 
-                    .intro {
-                        padding-left: 4vw;
-                        padding-right: 4vw;
-                        flex-direction: column;
+                .section-heading {
+                    font-size: 1.35rem;
+                    font-weight: 700;
+                    letter-spacing: -0.01em;
+                    margin-bottom: 24px;
+                    color: var(--text-primary);
+                }
+
+                .cards-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 16px;
+                    margin-bottom: 16px;
+                }
+
+                .card {
+                    background: var(--bg-card);
+                    border: 1px solid var(--border-subtle);
+                    border-radius: 12px;
+                    padding: 28px 24px;
+                    text-align: center;
+                    transition: border-color 0.2s, background 0.2s;
+                }
+
+                .card:hover {
+                    border-color: var(--border);
+                    background: var(--bg-card-hover);
+                }
+
+                .card-icon {
+                    font-size: 1.6rem;
+                    margin-bottom: 14px;
+                    display: block;
+                }
+
+                .card-title {
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: var(--text-primary);
+                    margin-bottom: 10px;
+                }
+
+                .card-desc {
+                    font-size: 0.92rem;
+                    color: var(--text-secondary);
+                    line-height: 1.65;
+                    font-weight: 300;
+                }
+
+                .beyond-section {
+                    margin-top: 48px;
+                }
+
+                .beyond-card {
+                    background: var(--bg-card);
+                    border: 1px solid var(--border-subtle);
+                    border-radius: 12px;
+                    padding: 28px 24px;
+                    text-align: center;
+                }
+
+                .beyond-desc {
+                    max-width: 560px;
+                    margin: 0 auto 0 auto;
+                }
+
+                .tags {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    justify-content: center;
+                    margin-top: 16px;
+                }
+
+                .tag {
+                    background: var(--accent-dim);
+                    color: var(--accent);
+                    font-size: 0.73rem;
+                    font-weight: 500;
+                    padding: 4px 12px;
+                    border-radius: 100px;
+                    border: 1px solid rgba(79, 158, 255, 0.2);
+                    font-family: "JetBrains Mono", monospace;
+                    letter-spacing: 0.02em;
+                }
+
+                @media (max-width: 992px) {
+                    .about-header {
+                        grid-template-columns: 1fr;
                     }
 
-                    .intro .content h1 {
-                        font-size: 12vw;
-                        width: 100%;
-                        line-height: 120%;
-                        font-weight: 500;
-                        text-align: center;
-                        text-shadow: 0 0 24px #1e4b6b88;
-                        margin-bottom: 16px;
+.avatar-wrap {
+                    justify-self: end;
+                    width: 120px;
+                    height: 120px;
+                    min-width: 120px;
+                    min-height: 120px;
                     }
 
-                    .intro .content p {
-                        font-size: 4vw;
-                        line-height: 128%;
-                        width: 100%;
-                        padding: 0 15px;
-                        font-weight: 300;
-                        text-align: center;
-                    }
-                    .social-links {
-                        display: flex;
-                        gap: 1rem;
-                        margin-top: 1.5vw;
+                    .stats-row {
+                        flex-wrap: wrap;
+                        gap: 20px;
                     }
 
-                    .social-links a {
-                        color: #fff;
-                        font-size: 2rem;
-                        transition: color 0.3s ease;
+                    .stat-divider {
+                        display: none;
                     }
 
-                    .social-links a:hover {
-                        color: #00aaff;
+                    .cards-grid {
+                        grid-template-columns: 1fr;
                     }
                 }
             `}</style>
-            <style jsx global>{`
-        .intro .content .action span strong {
-          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI",
-            Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-          font-style: normal;
-          font-weight: 400;
-          font-size: clamp(1.25661vw, 1.25661vw, 38.63px);
-          line-height: 128%;
-          color: #fdbab2;
-        }
-
-        @media screen and (max-width: 992px) {
-          .intro .content .action span strong {
-            font-size: 15.6443px;
-            line-height: 128%;
-          }
-        }
-
-        @media screen AND (min-width: 526px) AND (max-width: 992px) {
-          .intro .content .action span strong {
-            font-size: 20px;
-          }
-        }
-
-        @media screen AND (min-width: 1921px) {
-          .intro .content .action span strong {
-            font-size: 1vw;
-          }
-        }
-      `}</style>
         </>
     );
 }

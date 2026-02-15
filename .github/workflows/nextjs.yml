@@ -16,6 +16,9 @@ env:
   NEXT_PUBLIC_SERVICE_ID: ${{ secrets.NEXT_PUBLIC_SERVICE_ID }}
   NEXT_PUBLIC_TEMPLATE_ID: ${{ secrets.NEXT_PUBLIC_TEMPLATE_ID }}
   NEXT_PUBLIC_USER_ID: ${{ secrets.NEXT_PUBLIC_USER_ID }}
+  NOTION_SECRET_KEY: ${{secrets.NOTION_SECRET_KEY }}
+  NOTION_DATABASE_ID: ${{secrets.NOTION_DATABASE_ID}} 
+
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read

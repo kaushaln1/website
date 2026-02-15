@@ -10,12 +10,12 @@ function ProjectsColumn() {
     const [texts] = useState({
         projects: [
             {
-                backgroundColor: "#FFF1D5",
-                type: "React App",
-                title: "<strong>Terraform Code Generator with AI & RAG</strong>",
+                backgroundColor: "#D5E5FF",
+                type: "ML & Policy",
+                title: "<strong>Economic Inequality Early Warning System</strong>",
                 subtitle:
-                    "Developed an AI-powered Terraform code generator using Retrieval-Augmented Generation (RAG) and LLMs, automating Infrastructure-as-Code (IAc) creation",
-                techs: "AI LLM Terraform RAG Streamlit",
+                    "Real-time Kafka streaming, ML forecasting, causal inference, and GenAI to predict and explain inequality risk for policy and impact.",
+                techs: "Kafka XGBoost DoWhy GenAI FastAPI MLflow",
                 links: {
                     github: "",
                     website: "",
@@ -23,10 +23,34 @@ function ProjectsColumn() {
             },
             {
                 backgroundColor: "#FFF1D5",
-                type: "React App",
+                type: "AI & RAG",
+                title: "<strong>Terraform Code Generator with AI</strong>",
+                subtitle:
+                    "AI-powered Terraform code generator using Retrieval-Augmented Generation (RAG) and LLMs, automating Infrastructure-as-Code creation.",
+                techs: "AI LLM Terraform RAG Streamlit",
+                links: {
+                    github: "",
+                    website: "",
+                },
+            },
+            {
+                backgroundColor: "#D5E5FF",
+                type: "ChatOps",
+                title: "<strong>Slack App Access Manager</strong>",
+                subtitle:
+                    "Node.js app for managing production access requests directly within Slack. Streamlined access logs and compliance.",
+                techs: "Node.js SlackAPI AWS Lambda",
+                links: {
+                    github: "https://github.com/kaushaln1/slackApp",
+                    website: "",
+                },
+            },
+            {
+                backgroundColor: "#FFE2E2",
+                type: "K8s Platform",
                 title: "<strong>KubeControl App</strong>",
                 subtitle:
-                    "Created a containerized application deployment platform using EKS (Amazon Elastic Kubernetes Service) and Kubernetes to host a variety of applications. Programmed an application using React.js for frontend development and Flask as backend server to call Kubernetes APIs. Increased management of deployed apps via a user-friendly UI, reduced deployment time, and provided a scalable, easy-to-manage platform.",
+                    "Containerized application deployment platform using EKS. Simplified management via React UI and Flask backend.",
                 techs: "React.js Flask Kubernetes EKS",
                 links: {
                     github: "https://github.com/kaushaln1/KubeControl/tree/master",
@@ -35,58 +59,58 @@ function ProjectsColumn() {
             },
             {
                 backgroundColor: "#FFF1D5",
-                type: "NodeJs App ",
-                title: "<strong>Slack App</strong>",
+                type: "MLOps Platform",
+                title: "<strong>End-to-End MLOps Platform</strong>",
                 subtitle:
-                    "SlackApp is a Node.js application integrated with Slack. It allows users to request and register their PAR access for production accounts, like a production AWS account, directly within a Slack channel. When a user queries \"who took par?\", the app retrieves and displays the name, email, and time of PAR access from the PAR granting server.",
-                techs: "Node.js  SlackAPI",
+                    "From Zero to Production: A Kubernetes-Native MLOps System. Automated retraining and deployment.",
+                techs: "Kubernetes Feast MLflow FastAPI Prometheus",
                 links: {
-                    github: "https://github.com/kaushaln1/slackApp",
+                    github: "https://github.com/kaushaln1/Financial-Risk-Prediction/tree/feature_v1_1",
                     website: "",
                 },
             },
             {
-                backgroundColor: "#FFE2E2",
+                backgroundColor: "#FFF1D5",
                 type: "CI/CD",
-                title: "<strong>End to End deployment Pipeline</strong>",
+                title: "<strong>End to End Deployment Pipeline</strong>",
                 subtitle:
-                    "Project is to setup a Jenkins pipeline to automate the entire process of building, testing, and deploying a Spring Boot application from Git to a local Kubernetes cluster. It ensures consistent and reliable deployments, improves code quality with integrated testing and security scans, and simplifies the management of Kubernetes applications, addressing the complexities of continuous integration and continuous deployment (CI/CD).\n",
-                techs: "Jenkins Git Maven Trivy SonarQube Docker Helm Kubernetes",
+                    "Automated Jenkins pipeline for building, testing, and deploying Spring Boot apps to Kubernetes with security gates.",
+                techs: "Jenkins Docker Helm Kubernetes SonarQube",
                 links: {
                     github: "https://github.com/kaushaln1/End_to_End_pipeline_scripts",
                     website: "",
                 },
             },
             {
-                backgroundColor: "#FFF1D5",
-                type: "Kong Gateway Demo",
+                backgroundColor: "#FFE2E2",
+                type: "API Gateway",
                 title: "<strong>Kong Gateway with k8s</strong>",
                 subtitle:
-                    "This project is about configurations and scripts to deploy and manage Kong API Gateway on a Kubernetes cluster. It demonstrates Kong's use in a microservice architecture, including setup via Helm, configuration in DB-less mode, and testing routes with a bundled echo server.",
-                techs: "",
+                    "Kong API Gateway deployment on Kubernetes with Helm and DB-less configuration for GitOps.",
+                techs: "Kong Kubernetes Helm Lua",
                 links: {
                     github: "https://github.com/kaushaln1/KongGateway_k8s",
                     website: "",
                 },
             },
             {
-                backgroundColor: "#FFE2E2",
-                type: "Team Project",
-                title: "<strong>Platform setup</strong>",
+                backgroundColor: "#D5E5FF",
+                type: "Cloud Compliance",
+                title: "<strong>A2CW Compliance Watch</strong>",
                 subtitle:
-                    "Owned development of the CI/CD pipeline, enabling continuous application deployment on Kubernetes and designing the Cloud Connectivity Pattern for seamless AWS Aurora DB integration. Led the configuration of AppDynamics, Splunk, and DataDog for comprehensive application performance monitoring and troubleshooting. Contributed to the design and development of features within A2CW's Self-Compliance Tool, optimizing batch jobs for bulk data processing.",
-                techs: "Kubernetes AWS Aurora AppDynamics Splunk DataDog",
+                    "Compliance and monitoring pipeline for cloud applications with AWS Aurora integration and Splunk monitoring.",
+                techs: "Kubernetes AWS AppDynamics Splunk",
                 links: {
                     github: "",
                     website: "",
                 },
             },
             {
-                backgroundColor: "#D5E5FF",
-                type: "Team Project",
+                backgroundColor: "#FFF1D5",
+                type: "Cloud Migration",
                 title: "<strong>Samba Sheep API Migration Tool</strong>",
                 subtitle:
-                    "Designed, implemented, and deployed a one-click Node.js solution to migrate HSBC APIs from Pivotal Cloud (PCF) to AWS Cloud. Streamlined the migration of APIs with easy to use utility which saved approximately 1.3 million for the bank. Encouraged a collaborative environment by inner-sourcing utility for wider adoption across HSBC groups.",
+                    "Node.js solution to migrate APIs from PCF to AWS, saving ~$1.3M. Streamlined API transition process.",
                 techs: "Node.js AWS PCF",
                 links: {
                     github: "",
@@ -96,10 +120,13 @@ function ProjectsColumn() {
         ],
     });
 
+    const mainProjects = texts.projects.slice(0, 4);
+    const moreProjects = texts.projects.slice(4);
+
     return (
         <>
             <div className="column">
-                {texts.projects.map((item, i) => (
+                {mainProjects.map((item, i) => (
                     <div
                         className="item"
                         key={i}
@@ -129,12 +156,57 @@ function ProjectsColumn() {
                         </div>
                     </div>
                 ))}
+                {moreProjects.length > 0 && (
+                    <>
+                        <h3 className="more-heading">More Projects</h3>
+                        {moreProjects.map((item, i) => (
+                            <div
+                                className="item"
+                                key={i + 4}
+                                style={{ backgroundColor: item.backgroundColor }}
+                            >
+                                <h1
+                                    dangerouslySetInnerHTML={{ __html: item.type }}
+                                ></h1>
+                                <h2
+                                    dangerouslySetInnerHTML={{ __html: item.title }}
+                                ></h2>
+                                <p
+                                    dangerouslySetInnerHTML={{ __html: item.subtitle }}
+                                ></p>
+                                <span>{item.techs}</span>
+                                <div className="row-of-logos">
+                                    {item.links.github && (
+                                        <a href={item.links.github} target="_blank" rel="noopener noreferrer">
+                                            <img src="/logos/github-mark.png" alt="GitHub" />
+                                        </a>
+                                    )}
+                                    {item.links.website && (
+                                        <a href={item.links.website} target="_blank" rel="noopener noreferrer">
+                                            <img src="/logos/website.png" alt="Website" />
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </>
+                )}
             </div>
             <style jsx>{`
         .column {
           display: flex;
           flex-direction: column;
           margin-top: 16px;
+        }
+
+        .more-heading {
+          font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+          font-size: 18px;
+          font-weight: 600;
+          color: #2d3436;
+          margin: 30px 0 15px 0;
+          padding-bottom: 8px;
+          border-bottom: 1px solid #dfe6e9;
         }
 
         h1 {
