@@ -1,15 +1,16 @@
 import React from 'react';
+import DOMPurify from 'isomorphic-dompurify';
 
 export default function SectionHeading({ title }) {
     return (
         <div className="section-heading">
-            <h1 dangerouslySetInnerHTML={{ __html: title }}></h1>
+            <h1 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(title) }}></h1>
             <div className="underline"></div>
             <style jsx>{`
                 .section-heading {
                     margin-bottom: 30px;
                 }
-                
+
                 h1 {
                     font-family: Quicksand, sans-serif;
                     font-weight: 600;
@@ -35,4 +36,3 @@ export default function SectionHeading({ title }) {
         </div>
     );
 }
-

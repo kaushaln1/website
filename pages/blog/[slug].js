@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
+import rehypeSanitize from "rehype-sanitize";
 import { getPostBySlug, getAllSlugs } from "../../lib/notion";
 
 export default function BlogPost({ post }) {
@@ -46,7 +47,7 @@ export default function BlogPost({ post }) {
         </header>
 
         <div className="post-body">
-          <ReactMarkdown>{post.markdown}</ReactMarkdown>
+          <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{post.markdown}</ReactMarkdown>
         </div>
       </article>
 
