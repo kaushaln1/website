@@ -5,6 +5,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
+import DOMPurify from "isomorphic-dompurify";
 
 /**
  *
@@ -90,7 +91,11 @@ export default function SimpleAccordion() {
                                     fontFamily: "Quicksand",
                                 }}
                                 component="div"
-                                dangerouslySetInnerHTML={{ __html: item.questionDescription }}
+                                dangerouslySetInnerHTML={{
+                                    __html: DOMPurify.sanitize(item.questionDescription, {
+                                        ALLOWED_ATTR: ["style"],
+                                    }),
+                                }}
                             />
                         </AccordionDetails>
                     </Accordion>

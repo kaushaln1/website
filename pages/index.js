@@ -4,7 +4,6 @@ import Experience from "../components/home/Experience";
 import Contact from "../components/home/Contact";
 import Work from "../components/work/Work";
 import Head from "next/head";
-import parse from "html-react-parser";
 import Home from "../components/home/Home";
 import Blogs from "../components/home/Blogs";
 import { getBlogList } from "../lib/notion";
@@ -22,25 +21,7 @@ export default function Index({ notionPosts = [] }) {
     return () => window.removeEventListener("hashchange", sync);
   }, []);
 
-  const [texts] = useState({
-    title: `Kaushal Nerkar | AI & Cloud Engineer`,
-    head: `<script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "url": "",
-      "name": "Kaushal V Nerkar | Software Developer",
-      "description": "Portfolio website",
-      "founder": [
-        {
-            "@type": "Person",
-            "name": "Kaushal V Nerkar"
-        }
-      ]
-    }
-    </script>
-    <meta property="og:title" content="Kaushal Nerkar" />`
-  });
+  const title = "Kaushal Nerkar | AI & Cloud Engineer";
 
   const renderContent = () => {
     switch (activeSection) {
@@ -62,15 +43,26 @@ export default function Index({ notionPosts = [] }) {
   return (
       <>
         <Head>
-          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-KMD99G5"></script>
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
-          <title>{texts.title}</title>
+          <title>{title}</title>
           <link rel="icon" href="/favicon.png" />
-          {parse(texts.head)}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                url: "",
+                name: "Kaushal V Nerkar | Software Developer",
+                description: "Portfolio website",
+                founder: [{ "@type": "Person", name: "Kaushal V Nerkar" }],
+              }),
+            }}
+          />
+          <meta property="og:title" content="Kaushal Nerkar" />
         </Head>
-        
+
         <Layout activeSection={activeSection} setActiveSection={setActiveSection}>
             {renderContent()}
         </Layout>

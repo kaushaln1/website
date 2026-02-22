@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DOMPurify from "isomorphic-dompurify";
 
 /**
  * Projects Column from the Work section. Only for mobile
@@ -123,6 +124,8 @@ function ProjectsColumn() {
     const mainProjects = texts.projects.slice(0, 4);
     const moreProjects = texts.projects.slice(4);
 
+    const sanitize = (html) => DOMPurify.sanitize(html);
+
     return (
         <>
             <div className="column">
@@ -132,15 +135,9 @@ function ProjectsColumn() {
                         key={i}
                         style={{ backgroundColor: item.backgroundColor }}
                     >
-                        <h1
-                            dangerouslySetInnerHTML={{ __html: item.type }}
-                        ></h1>
-                        <h2
-                            dangerouslySetInnerHTML={{ __html: item.title }}
-                        ></h2>
-                        <p
-                            dangerouslySetInnerHTML={{ __html: item.subtitle }}
-                        ></p>
+                        <h1 dangerouslySetInnerHTML={{ __html: sanitize(item.type) }}></h1>
+                        <h2 dangerouslySetInnerHTML={{ __html: sanitize(item.title) }}></h2>
+                        <p dangerouslySetInnerHTML={{ __html: sanitize(item.subtitle) }}></p>
                         <span>{item.techs}</span>
                         <div className="row-of-logos">
                             {item.links.github && (
@@ -165,15 +162,9 @@ function ProjectsColumn() {
                                 key={i + 4}
                                 style={{ backgroundColor: item.backgroundColor }}
                             >
-                                <h1
-                                    dangerouslySetInnerHTML={{ __html: item.type }}
-                                ></h1>
-                                <h2
-                                    dangerouslySetInnerHTML={{ __html: item.title }}
-                                ></h2>
-                                <p
-                                    dangerouslySetInnerHTML={{ __html: item.subtitle }}
-                                ></p>
+                                <h1 dangerouslySetInnerHTML={{ __html: sanitize(item.type) }}></h1>
+                                <h2 dangerouslySetInnerHTML={{ __html: sanitize(item.title) }}></h2>
+                                <p dangerouslySetInnerHTML={{ __html: sanitize(item.subtitle) }}></p>
                                 <span>{item.techs}</span>
                                 <div className="row-of-logos">
                                     {item.links.github && (
